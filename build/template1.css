@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1.3rem;
   margin: 1.3rem auto;
   max-width: 1200px;
   padding: 0 0.3rem;
@@ -284,10 +284,10 @@ nav {
 
   /* sticky 行为（上方间隙恒定） */
   position: sticky;
-  top: 2rem;
+  top: 1rem;
 
   /* 不要用 height:100vh - 会导致溢出，使用 max-height 更稳 */
-  max-height: calc(100vh - 4rem);        /* 保证上下各 2rem 空隙 */
+  height: calc(100vh - 2rem);        /* 保证上下各 2rem 空隙 */
   overflow-y: auto;                      /* 内容超出可滚动 */
 
   /* 可选：给滚动条更好看的样式（WebKit）*/
