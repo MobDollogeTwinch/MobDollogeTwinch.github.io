@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>$title$</title>
+
+  $if(author)$
+  <meta name="author" content="$author$">
+  $endif$
+  <link rel="stylesheet" href="./template1.css">
+</head>
+
+<body>
+  <nav>
+    $table-of-contents$
+  </nav>
+
+  <article>
+    <header>
+      <h1 id="$title$">$title$</h1>
+      $if(author)$<p>作者：$author$</p>
+      &nbsp;&nbsp;&nbsp;&nbsp;$endif$
+      $if(date)$<p>日期：$date$</p>
+      &nbsp;&nbsp;&nbsp;&nbsp;$endif$
+      $if(status)$<p>文章状态：$status$</p>$endif$
+    </header>
+
+    <main>
+      $body$
+    </main>
+
+    <footer>
+      <p>北新大陆标准信息交换局 &copy; 2025</p>
+    </footer>
+  </article>
+
+  <script src="./template1.js"></script>
+</body>
+
+</html>
