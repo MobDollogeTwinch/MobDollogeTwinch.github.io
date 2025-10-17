@@ -11,7 +11,7 @@ body {
   max-width: 1200px;
   padding: 0 0.3rem;
 
-  font-family: "Noto Serif", "Georgia", "Times New Roman", serif;
+  font-family: "Fira Code", monospace;
   line-height: 1.6;
   background-color: #f9f9fb;
   color: #222;
