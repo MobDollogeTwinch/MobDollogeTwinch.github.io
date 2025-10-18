@@ -6,298 +6,7 @@
   <title>长岛语语法手册</title>
 
     <meta name="author" content="mob_dolloge">
-    <style type="text/css">
-html,
-body {
-display: flex;
-justify-content: center;
-align-items: flex-start;
-gap: 1.3rem;
-margin: 1.3rem auto;
-max-width: 1200px;
-padding: 0 0.3rem;
-font-family: "Fira Code", monospace;
-line-height: 1.6;
-background-color: #f9f9fb;
-color: #222;
-}
-
-article {
-max-width: 800px;
-flex: 1;
-background: #fff;
-padding: 2.2rem;
-border-radius: 8px;
-box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
-line-height: 1.3;
-margin-top: 2.5rem;
-margin-bottom: 1rem;
-font-weight: 600;
-}
-h1 {
-font-size: 2em;
-border-bottom: 3px solid #ddd;
-padding-bottom: .3em;
-}
-h2 {
-font-size: 1.6em;
-border-bottom: 2px solid #eee;
-padding-bottom: .2em;
-}
-h3 {
-font-size: 1.3em;
-color: #333;
-}
-h4,
-h5,
-h6 {
-font-size: 1.1em;
-color: #444;
-}
-
-p {
-margin: 1em 0;
-text-align: justify;
-}
-
-a {
-color: #0077cc;
-text-decoration: none;
-}
-a:hover {
-text-decoration: underline;
-}
-
-blockquote {
-border-left: 4px solid #ddd;
-padding-left: 1em;
-color: #555;
-margin: 1.2em 0;
-background: #fafafa;
-
-}
-
-ul,
-ol {
-margin: 1em 0 1em 0.5em;
-}
-li {
-margin-bottom: 0.3em;
-}
-
-code {
-font-family: "Fira Code", "Consolas", monospace;
-background: #f3f3f3;
-padding: 0.2em 0.4em;
-border-radius: 4px;
-font-size: 0.95em;
-}
-pre {
-background: #2d2d2d;
-color: #f8f8f2;
-padding: 1em;
-border-radius: 8px;
-overflow-x: auto;
-font-family: "Fira Code", "Consolas", monospace;
-font-size: 0.9em;
-line-height: 1.5;
-}
-pre code {
-background: none;
-color: inherit;
-padding: 0;
-font-size: inherit;
-}
-
-code.language-python {
-color: #ffb86c;
-}
-code.language-javascript {
-color: #8be9fd;
-}
-code.language-html {
-color: #50fa7b;
-}
-code.language-bash {
-color: #f1fa8c;
-}
-
-table {
-border-collapse: collapse;
-width: 100%;
-margin: 1.5em 0;
-font-size: 0.95em;
-}
-thead {
-background: #f0f0f0;
-border-bottom: 2px solid #ccc;
-}
-th,
-td {
-border: 1px solid #ddd;
-padding: 0.6em 0.8em;
-text-align: left;
-}
-tbody tr:nth-child(even) {
-background: #f9f9f9;
-}
-
-.footnotes {
-font-size: 0.9em;
-border-top: 1px solid #ddd;
-margin-top: 3em;
-padding-top: 1em;
-}
-.footnotes ol {
-margin-left: 1.2em;
-}
-
-hr {
-border: none;
-border-top: 2px solid #eee;
-margin: 2em 0;
-}
-
-img {
-max-width: 100%;
-display: block;
-margin: 1em auto;
-border-radius: 6px;
-}
-
-.math {
-font-family: "Latin Modern Math", "STIX Two Math", serif;
-font-size: 1em;
-}
-
-div.note,
-div.tip,
-div.warning {
-border-left: 5px solid;
-padding: 0.8em 1em;
-margin: 1em 0;
-border-radius: 4px;
-}
-div.note {
-border-color: #4a90e2;
-background: #eef4fb;
-}
-div.tip {
-border-color: #50c878;
-background: #f0fbf4;
-}
-div.warning {
-border-color: #ffb84d;
-background: #fff9f0;
-}
-
-header,
-footer {
-text-align: center;
-color: #777;
-font-size: 0.9em;
-margin-top: 2em;
-}
-header p {
-text-align: center;
-display: inline;
-}
-
-
-nav {
-flex: 0 0 260px; 
-min-width: 200px;
-max-width: 320px;
-background: #fff;
-border-radius: 8px;
-box-shadow: 0 6px 18px rgba(17,17,18,0.06);
-padding: 1rem 0.9rem;
-box-sizing: border-box;
-
-position: sticky;
-top: 1rem;
-
-height: calc(100vh - 2rem); 
-overflow-y: auto; 
-
-scrollbar-width: thin;
-}
-nav::-webkit-scrollbar { width: 10px; }
-nav::-webkit-scrollbar-thumb {
-background: rgba(0,0,0,0.08);
-border-radius: 8px;
-}
-nav::-webkit-scrollbar-track { background: transparent; }
-
-nav ul {
-list-style: none;
-margin: 0;
-padding: 0.4rem 0.6rem;
-}
-nav li { margin: 0.35rem 0; }
-
-nav a {
-display: block;
-padding: 0.45rem 0.6rem;
-color: #25406a;
-text-decoration: none;
-border-radius: 6px;
-font-size: 0.95rem;
-line-height: 1.4;
-transition: background .15s, color .15s, transform .06s;
-}
-nav a:hover,
-nav a:focus {
-background: rgba(37,64,106,0.06);
-color: #12213a;
-outline: none;
-}
-nav a.active {
-background: linear-gradient(90deg,#eaf3ff,#fff);
-border-left: 3px solid #3b82f6;
-padding-left: 0.45rem; 
-color: #0b3a8a;
-font-weight: 600;
-}
-
-nav ul ul {
-position: relative;
-margin-left: 0.6rem;
-padding-left: 0.9rem;
-border-left: none; 
-}
-nav ul ul::before {
-content: "";
-position: absolute;
-left: 0.35rem; 
-top: 0.4rem;
-bottom: 0.4rem;
-width: 0; 
-border-left: 2px dashed rgba(37,64,106,0.12);
-border-radius: 2px;
-}
-
-@media (max-width: 900px) {
-body { flex-direction: column; align-items: stretch; } 
-nav {
-position: static;
-width: 100%;
-max-width: none;
-margin-bottom: 1rem;
-border-radius: 8px;
-max-height: none;
-overflow: visible;
-}
-}</style>
+    <link rel="stylesheet" href="build/template1.css">
 </head>
 
 <body>
@@ -307,7 +16,8 @@ overflow: visible;
     <ul>
     <li><a href="#前瞻" id="toc-前瞻">前瞻</a></li>
     <li><a href="#历史与形成" id="toc-历史与形成">历史与形成</a></li>
-    <li><a href="#手册目标人群" id="toc-手册目标人群">手册目标人群</a></li>
+    <li><a href="#手册目标人群"
+    id="toc-手册目标人群">手册目标人群</a></li>
     </ul></li>
     <li><a href="#拼写" id="toc-拼写">拼写</a>
     <ul>
@@ -321,9 +31,9 @@ overflow: visible;
     <header>
       <h1 id="长岛语语法手册">长岛语语法手册</h1>
       <p>作者：mob_dolloge</p>
-          
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <p>日期：2025-10-16</p>
-          
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <p>文章状态：编辑中</p>
     </header>
 
@@ -359,10 +69,10 @@ overflow: visible;
       <h3 id="字母">字母</h3>
       <p>长岛语使用26对英文字母（分大小写）加一对特殊字母，这一对特殊字母分别是：</p>
       <ul>
-      <li>上点，又称单引号 <code>&#39;</code></li>
+      <li>上点，又称单引号 <code>'</code></li>
       <li>双点，又称冒号 <code>:</code></li>
       </ul>
-      <p>其中，双点 <code>:</code> 是上点 <code>&#39;</code> 的大写。</p>
+      <p>其中，双点 <code>:</code> 是上点 <code>'</code> 的大写。</p>
       <blockquote>
       <p>Note:<br />
       对于英语母语者以及英语学习者来说，这几乎不用重新学习，唯一需要注意的就是这两个特殊字母，它们是单词的组成部分，是单词层面而非句子层面的符号。</p>
@@ -515,7 +225,7 @@ overflow: visible;
       <td style="text-align: center;"><code>-</code></td>
       <td></td>
       <td style="text-align: center;">双引号</td>
-      <td style="text-align: center;"><code>&quot;</code></td>
+      <td style="text-align: center;"><code>"</code></td>
       <td></td>
       <td style="text-align: center;">双星号</td>
       <td style="text-align: center;"><code>**</code></td>
@@ -525,11 +235,11 @@ overflow: visible;
     </main>
 
     <footer>
-      <p>北新大陆标准信息交换局 © 2025</p>
+      <p>北新大陆标准信息交换局 &copy; 2025</p>
     </footer>
   </article>
 
-  <script></script>
+  <script src="build/template1.js"></script>
 </body>
 
 </html>
