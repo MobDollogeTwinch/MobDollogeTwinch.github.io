@@ -193,10 +193,6 @@ pre code {
     font-size: inherit
 }
 
-.sourceCode {
-    padding: 0
-}
-
 code.language-python {
     color: #ffb86c
 }
@@ -411,7 +407,7 @@ nav ul ul::before {
     font-family: "myicons";
     font-style: normal;
     font-weight: 400;
-    speak: none;
+    /* speak: none; */
     display: inline-block;
     text-decoration: inherit
 }
