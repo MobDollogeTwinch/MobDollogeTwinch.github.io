@@ -2,7 +2,7 @@
   // 元素选择（若类名不同，可调整选择器）
   const homeBtn = document.querySelector('nav .bar .fa-home[role="button"]');
   const topBtn  = document.querySelector('nav .bar .fa-top[role="button"]');
-  const adjBtn  = document.querySelector('nav .bar .fa-adjust[role="button"]');
+  const themeBtn = document.querySelector('nav .bar .fa-adjust[role="button"]'); // 原 adjBtn
 
   // 帮助函数 - 键盘激活 (Enter / Space)
   function bindKeyboardActivation(el) {
@@ -19,16 +19,14 @@
   if (homeBtn) {
     bindKeyboardActivation(homeBtn);
     homeBtn.addEventListener('click', () => {
-      // 优先使用 data-home 指定的目标（如果你想配置不同的首页）
       const nav = homeBtn.closest('nav');
       const custom = nav && nav.getAttribute('data-home');
       const dest = custom || '/';
-      // 对于单页应用（SPA）你可能想使用 router，这里使用 location.href 做通用跳转
       window.location.href = dest;
     });
   }
 
-  // --------- TOP: 平滑滚动到顶部（考虑 prefers-reduced-motion） ----------
+  // --------- TOP: 平滑滚动到顶部 ----------
   if (topBtn) {
     bindKeyboardActivation(topBtn);
     topBtn.addEventListener('click', () => {
@@ -41,46 +39,43 @@
     });
   }
 
-  // --------- ADJUST: 切换“反色”主题，并记忆到 localStorage ----------
-  const INVERT_KEY = 'site:inverted';
+  // --------- THEME: 切换夜间模式（CSS变量） ----------
+  const THEME_KEY = 'site:nightMode';
 
-  function applyInvertedState(on) {
-    if (on) {
+  function applyTheme(dark) {
+    if (dark) {
       document.documentElement.classList.add('inverted');
-      adjBtn && adjBtn.setAttribute('aria-pressed', 'true');
+      themeBtn && themeBtn.setAttribute('aria-pressed', 'true');
     } else {
       document.documentElement.classList.remove('inverted');
-      adjBtn && adjBtn.setAttribute('aria-pressed', 'false');
+      themeBtn && themeBtn.setAttribute('aria-pressed', 'false');
     }
   }
 
-  if (adjBtn) {
-    // 初始化 aria-pressed，如果不存在则设置
-    if (!adjBtn.hasAttribute('aria-pressed')) adjBtn.setAttribute('aria-pressed', 'false');
-    bindKeyboardActivation(adjBtn);
+  if (themeBtn) {
+    // 初始化 aria-pressed
+    if (!themeBtn.hasAttribute('aria-pressed')) themeBtn.setAttribute('aria-pressed', 'false');
+    bindKeyboardActivation(themeBtn);
 
     // 恢复上次状态
     try {
-      const last = localStorage.getItem(INVERT_KEY);
-      if (last === '1') applyInvertedState(true);
+      const last = localStorage.getItem(THEME_KEY);
+      if (last === '1') applyTheme(true);
     } catch (e) { /* ignore storage errors */ }
 
-    adjBtn.addEventListener('click', (e) => {
-      // 切换
-      const isOn = adjBtn.getAttribute('aria-pressed') === 'true';
-      applyInvertedState(!isOn);
+    themeBtn.addEventListener('click', () => {
+      const isOn = themeBtn.getAttribute('aria-pressed') === 'true';
+      applyTheme(!isOn);
       try {
-        localStorage.setItem(INVERT_KEY, !isOn ? '1' : '0');
-      } catch (err) {
-        // localStorage 失败不影响功能
-      }
+        localStorage.setItem(THEME_KEY, !isOn ? '1' : '0');
+      } catch (err) { /* ignore */ }
     });
   }
 
-  // 可选：按 Esc 关闭 tooltip 或收起（如果你加了 tooltip 脚本）
+  // 可选：按 Esc 关闭 tooltip 或收起
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      // 这里目前没有 tooltip 全局状态需要处理；保留占位以便未来扩展
+      // 占位以便未来扩展
     }
   });
 })();

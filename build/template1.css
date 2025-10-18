@@ -1,3 +1,76 @@
+:root,:root.inverted {
+    --article-text: var(--text-color)
+}
+
+:root {
+    --bg-color: #f9f9fb;
+    --text-color: #222222;
+    --muted-color: #777777;
+    --article-bg: #ffffff;
+    --article-radius: 8px;
+    --card-shadow: 0 0 10px rgba(0,0,0,.05);
+    --heading-family: "Noto Sans","Helvetica Neue",Arial,sans-serif;
+    --heading-border: #eee;
+    --link-color: #0077cc;
+    --link-hover-color: #005fa3;
+    --blockquote-border: #dddddd;
+    --blockquote-bg: #fafafa;
+    --blockquote-text: #555555;
+    --table-head-bg: #f0f0f0;
+    --table-border: #dddddd;
+    --table-row-even-bg: #f9f9f9;
+    --inline-code-bg: #f3f3f3;
+    --inline-code-text: #111111;
+    --pre-bg: #2d2d2d;
+    --pre-text: #f8f8f2;
+    --code-font-family: "Fira Code","Consolas",monospace;
+    --hr-color: #eeeeee;
+    --nav-bg: #ffffff;
+    --nav-text: #25406a;
+    --nav-item-hover-bg: rgba(37,64,106,.06);
+    --nav-item-hover-color: #12213a;
+    --nav-active-bg: linear-gradient(90deg,#eaf3ff,#fff);
+    --nav-active-border-left: #3b82f6;
+    --nav-active-color: #0b3a8a;
+    --bar-icon-color: #797d84;
+    --bar-icon-hover-color: #4a505a;
+    --nav-shadow: 0 6px 18px rgba(17,17,18,.06);
+    --footnote-border: #dddddd
+}
+
+:root.inverted {
+    --bg-color: #0f1113;
+    --text-color: #eaeaea;
+    --muted-color: #9ea6af;
+    --article-bg: #0b0c0d;
+    --card-shadow: 0 0 12px rgba(0,0,0,.35);
+    --heading-border: rgba(255,255,255,.06);
+    --link-color: #66aaff;
+    --link-hover-color: #93c7ff;
+    --blockquote-border: rgba(255,255,255,.06);
+    --blockquote-bg: #071018;
+    --blockquote-text: #c7d0d8;
+    --table-head-bg: rgba(255,255,255,.02);
+    --table-border: rgba(255,255,255,.04);
+    --table-row-even-bg: rgba(255,255,255,.01);
+    --inline-code-bg: #222529;
+    --inline-code-text: #eaeaea;
+    --pre-bg: #0f1113;
+    --pre-text: #f6f6f6;
+    --hr-color: rgba(255,255,255,.04);
+    --nav-bg: #0b0c0d;
+    --nav-text: #c5d7ee;
+    --nav-item-hover-bg: rgba(59,130,246,.06);
+    --nav-item-hover-color: #eaf3ff;
+    --nav-active-bg: linear-gradient(90deg, rgba(234,243,255,.04), rgba(255,255,255,.01));
+    --nav-active-border-left: rgba(59,130,246,.7);
+    --nav-active-color: #cfe6ff;
+    --bar-icon-color: #9aa1a8;
+    --bar-icon-hover-color: #dfe7ee;
+    --nav-shadow: 0 6px 18px rgba(0,0,0,.6);
+    --footnote-border: rgba(255,255,255,.06)
+}
+
 body,html {
     display: flex;
     justify-content: center;
@@ -8,21 +81,25 @@ body,html {
     padding: 0 .3rem;
     font-family: "Fira Code",monospace;
     line-height: 1.6;
-    background-color: #f9f9fb;
-    color: #222
+    background-color: var(--bg-color)
 }
 
 article {
     max-width: 800px;
     flex: 1;
-    background: #fff;
+    background: var(--article-bg);
+    color: var(--article-text);
     padding: 2.2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,.05)
+    border-radius: var(--article-radius);
+    box-shadow: var(--card-shadow)
+}
+
+body,h1,h2,html {
+    color: var(--text-color)
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: "Noto Sans","Helvetica Neue",Arial,sans-serif;
+    font-family: var(--heading-family);
     line-height: 1.3;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
@@ -31,24 +108,23 @@ h1,h2,h3,h4,h5,h6 {
 
 h1 {
     font-size: 2em;
-    border-bottom: 3px solid #ddd;
+    border-bottom: 3px solid var(--heading-border);
     padding-bottom: .3em
 }
 
 h2 {
     font-size: 1.6em;
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--heading-border);
     padding-bottom: .2em
 }
 
 h3 {
-    font-size: 1.3em;
-    color: #333
+    font-size: 1.3em
 }
 
 h4,h5,h6 {
     font-size: 1.1em;
-    color: #444
+    color: var(--muted-color)
 }
 
 p {
@@ -57,20 +133,21 @@ p {
 }
 
 a {
-    color: #07c;
+    color: var(--link-color);
     text-decoration: none
 }
 
 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
+    color: var(--link-hover-color)
 }
 
 blockquote {
-    border-left: 4px solid #ddd;
+    border-left: 4px solid var(--blockquote-border);
     padding-left: 1em;
-    color: #555;
+    color: var(--blockquote-text);
     margin: 1.2em 0;
-    background: #fafafa
+    background: var(--blockquote-bg)
 }
 
 ol,ul {
@@ -86,20 +163,24 @@ code,table {
 }
 
 code,pre {
-    font-family: "Fira Code","Consolas",monospace
+    font-family: var(--code-font-family)
 }
 
 code {
-    background: #f3f3f3;
+    background: var(--inline-code-bg);
     padding: .2em .4em;
-    border-radius: 4px
+    border-radius: 4px;
+    color: var(--inline-code-text)
+}
+
+.sourceCode,pre {
+    background: var(--pre-bg);
+    color: var(--pre-text);
+    border-radius: 8px
 }
 
 pre {
-    background: #2d2d2d;
-    color: #f8f8f2;
     padding: 1em;
-    border-radius: 8px;
     overflow-x: auto;
     font-size: .9em;
     line-height: 1.5
@@ -110,6 +191,10 @@ pre code {
     color: inherit;
     padding: 0;
     font-size: inherit
+}
+
+.sourceCode {
+    padding: 0
 }
 
 code.language-python {
@@ -128,30 +213,35 @@ code.language-bash {
     color: #f1fa8c
 }
 
+h3,p,table {
+    color: var(--text-color)
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
-    margin: 1.5em 0
+    margin: 1.5em 0;
+    background-color: transparent
 }
 
 thead {
-    background: #f0f0f0;
-    border-bottom: 2px solid #ccc
+    background: var(--table-head-bg);
+    border-bottom: 2px solid var(--table-border)
 }
 
 td,th {
-    border: 1px solid #ddd;
+    border: 1px solid var(--table-border);
     padding: .6em .8em;
     text-align: left
 }
 
 tbody tr:nth-child(even) {
-    background: #f9f9f9
+    background: var(--table-row-even-bg)
 }
 
 .footnotes {
     font-size: .9em;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--footnote-border);
     margin-top: 3em;
     padding-top: 1em
 }
@@ -162,7 +252,7 @@ tbody tr:nth-child(even) {
 
 hr {
     border: 0;
-    border-top: 2px solid #eee;
+    border-top: 2px solid var(--hr-color);
     margin: 2em 0
 }
 
@@ -202,7 +292,7 @@ div.warning {
 
 footer,header {
     text-align: center;
-    color: #777;
+    color: var(--muted-color);
     font-size: .9em;
     margin-top: 2em
 }
@@ -216,9 +306,9 @@ nav {
     flex: 0 0 260px;
     min-width: 200px;
     max-width: 320px;
-    background: #fff;
+    background: var(--nav-bg);
     border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(17,17,18,.06);
+    box-shadow: var(--nav-shadow);
     padding: 1rem .9rem;
     box-sizing: border-box;
     position: sticky;
@@ -256,7 +346,7 @@ nav li {
 nav a {
     display: block;
     padding: .45rem .6rem;
-    color: #25406a;
+    color: var(--nav-text);
     text-decoration: none;
     border-radius: 6px;
     font-size: .95rem;
@@ -265,16 +355,16 @@ nav a {
 }
 
 nav a:focus,nav a:hover {
-    background: rgba(37,64,106,.06);
-    color: #12213a;
+    background: var(--nav-item-hover-bg);
+    color: var(--nav-item-hover-color);
     outline: 0
 }
 
 nav a.active {
-    background: linear-gradient(90deg,#eaf3ff,#fff);
-    border-left: 3px solid #3b82f6;
+    background: var(--nav-active-bg);
+    border-left: 3px solid var(--nav-active-border-left);
     padding-left: .45rem;
-    color: #0b3a8a;
+    color: var(--nav-active-color);
     font-weight: 600
 }
 
@@ -362,11 +452,11 @@ nav .bar {
     padding-top: .25rem;
     padding-bottom: 1.8rem;
     font-size: 1.3em;
-    color: #797d84
+    color: var(--bar-icon-color)
 }
 
 nav .bar i:hover {
-    color: #4a505a;
+    color: var(--bar-icon-hover-color);
     cursor: pointer
 }
 
@@ -395,7 +485,7 @@ nav .bar i[role=button] {
 }
 
 nav .bar i[role=button]:focus,nav .bar i[role=button]:hover {
-    background: rgba(37,64,106,.06);
+    background: var(--nav-item-hover-bg);
     transform: translateY(-3px);
     outline: 0;
     box-shadow: 0 6px 14px rgba(17,17,18,.04)
@@ -413,15 +503,7 @@ nav .bar i[role=button]:active {
 nav .bar i[role=button][aria-pressed=true] {
     background: linear-gradient(90deg,#eaf3ff,#fff);
     border-left: 2px solid rgba(59,130,246,.18);
-    color: #0b3a8a
-}
-
-html.inverted {
-    background-color: unset
-}
-
-html.inverted,html.inverted img,html.inverted picture,html.inverted svg,html.inverted video {
-    filter: invert(1) hue-rotate(180deg)
+    color: var(--nav-active-color)
 }
 
 @media (max-width:900px) {
