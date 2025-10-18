@@ -11,7 +11,10 @@ pandoc "$1.md" --template=metadata.pandoc-tpl --metadata link="$1.html" \
 jq '[sort_by(.link) | group_by(.link)[] | max_by(.date)]' index.json > index.tmp && mv index.tmp index.json
 
 rm -rf "$1.md"
+git restore --staged "$1.md"
 
-# git add "$1.html"
-# git commit -m "update $1.html"
-# git push origin main
+git add "$1.html"
+git commit -m "update $1.html"
+git push origin main
+
+git checkout draft
