@@ -4,7 +4,10 @@ git commit -m "update $1.md"
 git checkout main
 git checkout draft -- "$1.md"
 
-pandoc "$1.md" -o "$1.html" --template "./build/$2.html" --toc --standalone --highlight-style=pygments
+pandoc "$1.md" -o "$1.html" \
+  --template "./build/$2.html" \
+  --toc --standalone \
+  ${3:+--syntax-highlighting="$3"}
 
 pandoc "$1.md" --template=metadata.pandoc-tpl --metadata link="$1.html" \
 | sed 's/,$//' \
