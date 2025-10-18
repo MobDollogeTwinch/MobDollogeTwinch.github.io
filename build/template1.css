@@ -1,367 +1,433 @@
-/* ===========
-   Base Reset
-   =========== */
-html,
-body {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1.3rem;
-  margin: 1.3rem auto;
-  max-width: 1200px;
-  padding: 0 0.3rem;
-
-  font-family: "Fira Code", monospace;
-  line-height: 1.6;
-  background-color: #f9f9fb;
-  color: #222;
+body,html {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.3rem;
+    margin: 1.3rem auto;
+    max-width: 1200px;
+    padding: 0 .3rem;
+    font-family: "Fira Code",monospace;
+    line-height: 1.6;
+    background-color: #f9f9fb;
+    color: #222
 }
 
-/* ===========
-   Page Layout
-   =========== */
 article {
-  max-width: 800px;
-  flex: 1;
-  background: #fff;
-  padding: 2.2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    max-width: 800px;
+    flex: 1;
+    background: #fff;
+    padding: 2.2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,.05)
 }
 
-/* ===========
-   Headings
-   =========== */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.3;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Noto Sans","Helvetica Neue",Arial,sans-serif;
+    line-height: 1.3;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600
 }
 
 h1 {
-  font-size: 2em;
-  border-bottom: 3px solid #ddd;
-  padding-bottom: .3em;
+    font-size: 2em;
+    border-bottom: 3px solid #ddd;
+    padding-bottom: .3em
 }
 
 h2 {
-  font-size: 1.6em;
-  border-bottom: 2px solid #eee;
-  padding-bottom: .2em;
+    font-size: 1.6em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: .2em
 }
 
 h3 {
-  font-size: 1.3em;
-  color: #333;
+    font-size: 1.3em;
+    color: #333
 }
 
-h4,
-h5,
-h6 {
-  font-size: 1.1em;
-  color: #444;
+h4,h5,h6 {
+    font-size: 1.1em;
+    color: #444
 }
 
-/* ===========
-   Paragraphs
-   =========== */
 p {
-  margin: 1em 0;
-  text-align: justify;
+    margin: 1em 0;
+    text-align: justify
 }
 
-/* ===========
-   Links
-   =========== */
 a {
-  color: #0077cc;
-  text-decoration: none;
+    color: #07c;
+    text-decoration: none
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline
 }
 
-/* ===========
-   Blockquotes
-   =========== */
 blockquote {
-  border-left: 4px solid #ddd;
-  padding-left: 1em;
-  color: #555;
-  margin: 1.2em 0;
-  background: #fafafa;
-  /* font-style: italic; */
+    border-left: 4px solid #ddd;
+    padding-left: 1em;
+    color: #555;
+    margin: 1.2em 0;
+    background: #fafafa
 }
 
-/* ===========
-   Lists
-   =========== */
-ul,
-ol {
-  margin: 1em 0 1em 0.5em;
+ol,ul {
+    margin: 1em 0 1em .5em
 }
 
 li {
-  margin-bottom: 0.3em;
+    margin-bottom: .3em
 }
 
-/* ===========
-   Code
-   =========== */
+code,table {
+    font-size: .95em
+}
+
+code,pre {
+    font-family: "Fira Code","Consolas",monospace
+}
+
 code {
-  font-family: "Fira Code", "Consolas", monospace;
-  background: #f3f3f3;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-size: 0.95em;
+    background: #f3f3f3;
+    padding: .2em .4em;
+    border-radius: 4px
 }
 
 pre {
-  background: #2d2d2d;
-  color: #f8f8f2;
-  padding: 1em;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-family: "Fira Code", "Consolas", monospace;
-  font-size: 0.9em;
-  line-height: 1.5;
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1em;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: .9em;
+    line-height: 1.5
 }
 
 pre code {
-  background: none;
-  color: inherit;
-  padding: 0;
-  font-size: inherit;
+    background: 0 0;
+    color: inherit;
+    padding: 0;
+    font-size: inherit
 }
 
-/* Syntax highlight fallback (if not using highlight.js) */
 code.language-python {
-  color: #ffb86c;
+    color: #ffb86c
 }
 
 code.language-javascript {
-  color: #8be9fd;
+    color: #8be9fd
 }
 
 code.language-html {
-  color: #50fa7b;
+    color: #50fa7b
 }
 
 code.language-bash {
-  color: #f1fa8c;
+    color: #f1fa8c
 }
 
-/* ===========
-   Tables
-   =========== */
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1.5em 0;
-  font-size: 0.95em;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5em 0
 }
 
 thead {
-  background: #f0f0f0;
-  border-bottom: 2px solid #ccc;
+    background: #f0f0f0;
+    border-bottom: 2px solid #ccc
 }
 
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 0.6em 0.8em;
-  text-align: left;
+td,th {
+    border: 1px solid #ddd;
+    padding: .6em .8em;
+    text-align: left
 }
 
 tbody tr:nth-child(even) {
-  background: #f9f9f9;
+    background: #f9f9f9
 }
 
-/* ===========
-   Footnotes
-   =========== */
 .footnotes {
-  font-size: 0.9em;
-  border-top: 1px solid #ddd;
-  margin-top: 3em;
-  padding-top: 1em;
+    font-size: .9em;
+    border-top: 1px solid #ddd;
+    margin-top: 3em;
+    padding-top: 1em
 }
 
 .footnotes ol {
-  margin-left: 1.2em;
+    margin-left: 1.2em
 }
 
-/* ===========
-   Horizontal Rule
-   =========== */
 hr {
-  border: none;
-  border-top: 2px solid #eee;
-  margin: 2em 0;
+    border: 0;
+    border-top: 2px solid #eee;
+    margin: 2em 0
 }
 
-/* ===========
-   Images
-   =========== */
 img {
-  max-width: 100%;
-  display: block;
-  margin: 1em auto;
-  border-radius: 6px;
+    max-width: 100%;
+    display: block;
+    margin: 1em auto;
+    border-radius: 6px
 }
 
-/* ===========
-   Math (MathJax or KaTeX)
-   =========== */
 .math {
-  font-family: "Latin Modern Math", "STIX Two Math", serif;
-  font-size: 1em;
+    font-family: "Latin Modern Math","STIX Two Math",serif;
+    font-size: 1em
 }
 
-/* ===========
-   Custom Divs (Pandoc fenced divs)
-   =========== */
-div.note,
-div.tip,
-div.warning {
-  border-left: 5px solid;
-  padding: 0.8em 1em;
-  margin: 1em 0;
-  border-radius: 4px;
+div.note,div.tip,div.warning {
+    border-left: 5px solid;
+    padding: .8em 1em;
+    margin: 1em 0;
+    border-radius: 4px
 }
 
 div.note {
-  border-color: #4a90e2;
-  background: #eef4fb;
+    border-color: #4a90e2;
+    background: #eef4fb
 }
 
 div.tip {
-  border-color: #50c878;
-  background: #f0fbf4;
+    border-color: #50c878;
+    background: #f0fbf4
 }
 
 div.warning {
-  border-color: #ffb84d;
-  background: #fff9f0;
+    border-color: #ffb84d;
+    background: #fff9f0
 }
 
-/* ===========
-   Headers & Footers (if used)
-   =========== */
-header,
-footer {
-  text-align: center;
-  color: #777;
-  font-size: 0.9em;
-  margin-top: 2em;
+footer,header {
+    text-align: center;
+    color: #777;
+    font-size: .9em;
+    margin-top: 2em
 }
 
 header p {
-  text-align: center;
-  display: inline;
+    text-align: center;
+    display: inline
 }
 
-/* nav */
-/* --- 左侧目录（推荐） --- */
 nav {
-  flex: 0 0 260px;                       /* 固定列宽（占据左列） */
-  min-width: 200px;
-  max-width: 320px;
-
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(17,17,18,0.06);
-  padding: 1rem 0.9rem;
-  box-sizing: border-box;
-
-  /* sticky 行为（上方间隙恒定） */
-  position: sticky;
-  top: 1rem;
-
-  /* 不要用 height:100vh - 会导致溢出，使用 max-height 更稳 */
-  height: calc(100vh - 2rem);        /* 保证上下各 2rem 空隙 */
-  overflow-y: auto;                      /* 内容超出可滚动 */
-
-  /* 可选：给滚动条更好看的样式（WebKit）*/
-  scrollbar-width: thin;
+    flex: 0 0 260px;
+    min-width: 200px;
+    max-width: 320px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(17,17,18,.06);
+    padding: 1rem .9rem;
+    box-sizing: border-box;
+    position: sticky;
+    top: 1rem;
+    height: calc(100vh - 2rem);
+    scrollbar-width: thin
 }
-nav::-webkit-scrollbar { width: 10px; }
-nav::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.08);
-  border-radius: 8px;
-}
-nav::-webkit-scrollbar-track { background: transparent; }
 
-/* nav 内部列表样式 */
+nav .toc::-webkit-scrollbar {
+    width: 10px
+}
+
+nav .toc::-webkit-scrollbar-thumb,nav::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,.08);
+    border-radius: 8px
+}
+
+nav::-webkit-scrollbar-track {
+    background: 0 0
+}
+
+nav .toc {
+    margin: 0
+}
+
 nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0.4rem 0.6rem;
+    list-style: none;
+    padding: 0
 }
-nav li { margin: 0.35rem 0; }
 
-/* 链接样式 */
+nav li {
+    margin: .35rem 0
+}
+
 nav a {
-  display: block;
-  padding: 0.45rem 0.6rem;
-  color: #25406a;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  transition: background .15s, color .15s, transform .06s;
-}
-nav a:hover,
-nav a:focus {
-  background: rgba(37,64,106,0.06);
-  color: #12213a;
-  outline: none;
-}
-nav a.active {
-  background: linear-gradient(90deg,#eaf3ff,#fff);
-  border-left: 3px solid #3b82f6;
-  padding-left: 0.45rem;    /* 适配左侧边框 */
-  color: #0b3a8a;
-  font-weight: 600;
+    display: block;
+    padding: .45rem .6rem;
+    color: #25406a;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: .95rem;
+    line-height: 1.4;
+    transition: background .15s,color .15s,transform .06s
 }
 
-/* 支持多级目录的缩进 */
+nav a:focus,nav a:hover {
+    background: rgba(37,64,106,.06);
+    color: #12213a;
+    outline: 0
+}
+
+nav a.active {
+    background: linear-gradient(90deg,#eaf3ff,#fff);
+    border-left: 3px solid #3b82f6;
+    padding-left: .45rem;
+    color: #0b3a8a;
+    font-weight: 600
+}
+
 nav ul ul {
-  position: relative;
-  margin-left: 0.6rem;
-  padding-left: 0.9rem;
-  border-left: none; /* 取消原生边框 */
+    position: relative;
+    margin-left: .6rem;
+    padding-left: .9rem;
+    border-left: none
 }
 
 nav ul ul::before {
-  content: "";
-  position: absolute;
-  left: 0.35rem;           /* 线离子项的距离 */
-  top: 0.4rem;
-  bottom: 0.4rem;
-  width: 0;                /* 线用边框画或背景画 */
-  border-left: 2px dashed rgba(37,64,106,0.12);
-  border-radius: 2px;
+    content: "";
+    position: absolute;
+    left: .35rem;
+    top: .4rem;
+    bottom: .4rem;
+    width: 0;
+    border-left: 2px dashed rgba(37,64,106,.12);
+    border-radius: 2px
 }
 
-/* 小屏幕适配：把 nav 放到上方并取消 sticky */
-@media (max-width: 900px) {
-  body { flex-direction: column; align-items: stretch; } /* 如果你用 body flex */
-  nav {
-    position: static;
-    width: 100%;
-    max-width: none;
-    margin-bottom: 1rem;
+@media (max-width:900px) {
+    body {
+        flex-direction: column;
+        align-items: stretch
+    }
+
+    nav {
+        position: static;
+        width: 100%;
+        max-width: none;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        max-height: none;
+        overflow: visible
+    }
+}
+
+@font-face {
+    font-family:"myicons";src:url(font/fontello.woff2)format("woff2"),url(font/fontello.woff)format("woff");font-weight:400;font-style:normal
+}
+
+[class*=" fa-"],[class^=fa-] {
+    font-family: "myicons";
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit
+}
+
+.fa-home::before {
+    content: ""
+}
+
+.fa-top::before {
+    content: ""
+}
+
+.fa-adjust::before {
+    content: ""
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: visible
+}
+
+nav .toc {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: .25rem
+}
+
+nav .bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: .6rem;
+    padding-top: .25rem;
+    padding-bottom: 1.8rem;
+    font-size: 1.3em;
+    color: #797d84
+}
+
+nav .bar i:hover {
+    color: #4a505a;
+    cursor: pointer
+}
+
+nav .toc>* {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+nav::-webkit-scrollbar {
+    width: 0;
+    height: 0
+}
+
+nav .bar i[role=button] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
-    max-height: none;
-    overflow: visible;
-  }
+    cursor: pointer;
+    user-select: none;
+    font-size: 18px;
+    transition: transform .12s ease,background .12s ease,box-shadow .12s ease;
+    -webkit-tap-highlight-color: transparent
+}
+
+nav .bar i[role=button]:focus,nav .bar i[role=button]:hover {
+    background: rgba(37,64,106,.06);
+    transform: translateY(-3px);
+    outline: 0;
+    box-shadow: 0 6px 14px rgba(17,17,18,.04)
+}
+
+nav .bar i[role=button]:focus-visible {
+    box-shadow: 0 0 0 4px rgba(59,130,246,.12),0 6px 14px rgba(17,17,18,.03)
+}
+
+nav .bar i[role=button]:active {
+    transform: translateY(0);
+    background: rgba(37,64,106,.09)
+}
+
+nav .bar i[role=button][aria-pressed=true] {
+    background: linear-gradient(90deg,#eaf3ff,#fff);
+    border-left: 2px solid rgba(59,130,246,.18);
+    color: #0b3a8a
+}
+
+html.inverted {
+    background-color: unset
+}
+
+html.inverted,html.inverted img,html.inverted picture,html.inverted svg,html.inverted video {
+    filter: invert(1) hue-rotate(180deg)
+}
+
+@media (max-width:900px) {
+    nav .bar i[role=button] {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px
+    }
 }

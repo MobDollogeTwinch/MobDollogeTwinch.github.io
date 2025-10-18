@@ -13,7 +13,15 @@
 
 <body>
   <nav>
-    $table-of-contents$
+    <div class="toc" aria-label="目录">
+      $table-of-contents$
+    </div>
+
+    <div class="bar" role="navigation" aria-label="快速操作">
+      <i class="fa-home" role="button" tabindex="0" aria-label="首页"></i>
+      <i class="fa-top" role="button" tabindex="0" aria-label="回到顶部"></i>
+      <i class="fa-adjust" role="button" tabindex="0" aria-label="切换主题"></i>
+    </div>
   </nav>
 
   <article>
