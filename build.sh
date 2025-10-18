@@ -17,7 +17,8 @@ rm -rf "$1.md"
 git restore --staged "$1.md"
 
 git add "$1.html"
-git commit -m "update $1.html"
+git add index.json
+git commit -m "update $1.html with index.json"
 git push origin main
 
 git checkout draft
