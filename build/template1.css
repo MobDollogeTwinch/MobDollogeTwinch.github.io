@@ -497,8 +497,7 @@ nav .bar i[role=button]:active {
 }
 
 nav .bar i[role=button][aria-pressed=true] {
-    background: linear-gradient(90deg,#eaf3ff,#fff);
-    border-left: 2px solid rgba(59,130,246,.18);
+    border: 2px solid rgba(59,130,246,.18);
     color: var(--nav-active-color)
 }
 
