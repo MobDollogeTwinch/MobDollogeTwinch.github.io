@@ -1,22 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MOB的博客</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h1>MOB的博客</h1>
+  <h1>get_blog(__MOB__)</h1>
 
-  <ul>
-  </ul>
+  <div class="table">
+    <div class="header">
+      <div>标题</div>
+      <div>作者</div>
+      <div>日期</div>
+      <div>状态</div>
+    </div>
+
+    <ul id="blog-list"></ul>
+  </div>
 
   <script>
-    const ul = document.querySelector('ul')
+    const ul = document.querySelector('#blog-list');
     fetch('index.json')
-      .then(data => data.json())
+      .then(res => res.json())
       .then(datas => datas.forEach(data => {
         const li = document.createElement("li");
 
@@ -25,20 +34,23 @@
         a.textContent = data.title;
         li.appendChild(a);
 
-        const pAuthor = document.createElement("p");
-        pAuthor.textContent = `作者：${data.author}`;
-        li.appendChild(pAuthor);
+        const author = document.createElement("div");
+        author.textContent = data.author;
+        li.appendChild(author);
 
-        const pDate = document.createElement("p");
-        pDate.textContent = `日期：${data.date}`;
-        li.appendChild(pDate);
+        const date = document.createElement("div");
+        date.textContent = data.date;
+        li.appendChild(date);
 
-        const pStatus = document.createElement("p");
-        pStatus.textContent = `文章状态：${data.status}`;
-        li.appendChild(pStatus);
+        const status = document.createElement("div");
+        status.textContent = data.status;
+        status.classList.add("status");
+        if (data.status.includes("完成")) status.classList.add("done");
+        if (data.status.includes("编辑")) status.classList.add("editing");
+        li.appendChild(status);
 
         ul.appendChild(li);
-      }))
+      }));
   </script>
 </body>
 
