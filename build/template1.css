@@ -382,23 +382,6 @@ nav ul ul::before {
     border-radius: 2px
 }
 
-@media (max-width:900px) {
-    body {
-        flex-direction: column;
-        align-items: stretch
-    }
-
-    nav {
-        position: static;
-        width: 100%;
-        max-width: none;
-        margin-bottom: 1rem;
-        border-radius: 8px;
-        max-height: none;
-        overflow: visible
-    }
-}
-
 @font-face {
     font-family:"myicons";src:url(font/fontello.woff2)format("woff2"),url(font/fontello.woff)format("woff");font-weight:400;font-style:normal
 }
@@ -501,10 +484,18 @@ nav .bar i[role=button][aria-pressed=true] {
     color: var(--nav-active-color)
 }
 
-@media (max-width:900px) {
-    nav .bar i[role=button] {
-        width: 50px;
-        height: 50px;
-        border-radius: 10px
-    }
+@media (max-width: 900px) {
+  nav {
+    min-width: unset;
+    max-width: 3.5rem;
+  }
+
+  nav .toc {
+    display: none;
+  }
+
+  nav .bar {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
 }
