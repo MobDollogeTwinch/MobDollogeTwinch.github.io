@@ -85,6 +85,7 @@ body,html {
 }
 
 article {
+    max-width: 800px;
     flex: 1;
     background: var(--article-bg);
     color: var(--article-text);
@@ -299,6 +300,8 @@ header p {
 
 nav {
     flex: 0 0 260px;
+    min-width: 200px;
+    max-width: 320px;
     background: var(--nav-bg);
     border-radius: 8px;
     box-shadow: var(--nav-shadow);
@@ -307,6 +310,7 @@ nav {
     position: sticky;
     top: 1rem;
     height: calc(100vh - 2rem);
+    scrollbar-width: thin
 }
 
 nav .toc::-webkit-scrollbar {
@@ -379,74 +383,20 @@ nav ul ul::before {
 }
 
 @media (max-width:900px) {
-  :root {
-    --nav-bar-h: 56px; /* 根据你的 .bar 真正高度调整 */
-  }
+    body {
+        flex-direction: column;
+        align-items: stretch
+    }
 
-  body {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    width: 100%;
-    margin: 0;
-    border-radius: 0.4rem;
-    background: var(--nav-bg, #fff);
-    transition: box-shadow .18s ease, background .18s ease;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  nav .bar {
-    flex: 0 0 auto;
-    height: var(--nav-bar-h);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .4rem .6rem;
-    gap: .6rem;
-    position: relative;
-    backdrop-filter: blur(4px);
-  }
-
-  /* toc 默认是收起/不可见（页面不是顶端时） */
-  nav .toc {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 .6rem .8rem;
-
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-6px);
-    pointer-events: none;
-    transition: max-height .28s cubic-bezier(.2,.9,.2,1),
-                opacity .18s ease,
-                transform .18s ease;
-  }
-
-  /* 当页面在顶端（nav 拥有 page-top 类）时展开 toc */
-  nav.page-top {
-    box-shadow: 0 8px 20px rgba(0,0,0,.06);
-  }
-
-  nav.page-top .toc {
-    max-height: calc(100vh - var(--nav-bar-h));
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    padding-top: .6rem;
-  }
-
-  /* 滚动条样式（可选） */
-  nav .toc::-webkit-scrollbar { width: 8px; }
-  nav .toc::-webkit-scrollbar-thumb { background: rgba(0,0,0,.08); border-radius: 6px; }
+    nav {
+        position: static;
+        width: 100%;
+        max-width: none;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        max-height: none;
+        overflow: visible
+    }
 }
 
 @font-face {
