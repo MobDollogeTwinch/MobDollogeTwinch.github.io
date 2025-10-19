@@ -1,8 +1,8 @@
 ---
 title: "我如何搭建博客工作流？"
 author: "mob_dolloge"
-date: "2025-10-18"
-status: "编辑中"
+date: "2025-10-19"
+status: "已完成"
 ---
 
 ## 当前环境 & 工具
@@ -246,6 +246,7 @@ pandoc "$1.md" --template=metadata.pandoc-tpl --metadata link="$1.html" \
 ### 使用build.sh
 
 通过命令`source build.sh <草稿> <模板> <代码样式>`，即可将转换后的内容推送到远程仓库。其中：
+
 - <草稿>：md草稿文件的名字，记得不用带md后缀。
 - <模板>：要使用的模板，所有可用模板都在main分支下的build文件夹下，同样的这里不用带html后缀。目前只写了template1。
 - <代码样式>：有时候写md文件时会加代码块进去，转换为html文件时可以指定样式，推荐**zenburn**。
