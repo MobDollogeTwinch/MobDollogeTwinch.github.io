@@ -118,9 +118,9 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       <h1 id="我如何搭建博客工作流？">我如何搭建博客工作流？</h1>
       <p>作者：mob_dolloge</p>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <p>日期：2025-10-18</p>
+      <p>日期：2025-10-19</p>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <p>文章状态：编辑中</p>
+      <p>文章状态：已完成</p>
     </header>
 
     <main>
@@ -322,11 +322,12 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> index.json.tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> index.json.tmp index.json</span></code></pre></div>
       <p>就是用pandoc提取md文件中YAML元数据，再补充一个叫link的元数据项（<code>--metadata link="$1.html"</code>），把所得元数据交给jq处理成json格式，输出到<code>index.json</code>。</p>
       <h3 id="使用build.sh">使用build.sh</h3>
-      <p>通过命令<code>source build.sh &lt;草稿&gt; &lt;模板&gt; &lt;代码样式&gt;</code>，即可将转换后的内容推送到远程仓库。其中：
-      - <草稿>：md草稿文件的名字，记得不用带md后缀。 -
-      <模板>：要使用的模板，所有可用模板都在main分支下的build文件夹下，同样的这里不用带html后缀。目前只写了template1。
-      -
-      <代码样式>：有时候写md文件时会加代码块进去，转换为html文件时可以指定样式，推荐<strong>zenburn</strong>。</p>
+      <p>通过命令<code>source build.sh &lt;草稿&gt; &lt;模板&gt; &lt;代码样式&gt;</code>，即可将转换后的内容推送到远程仓库。其中：</p>
+      <ul>
+      <li><草稿>：md草稿文件的名字，记得不用带md后缀。</li>
+      <li><模板>：要使用的模板，所有可用模板都在main分支下的build文件夹下，同样的这里不用带html后缀。目前只写了template1。</li>
+      <li><代码样式>：有时候写md文件时会加代码块进去，转换为html文件时可以指定样式，推荐<strong>zenburn</strong>。</li>
+      </ul>
     </main>
 
     <footer>
