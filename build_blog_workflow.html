@@ -85,15 +85,23 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       <li><a href="#搭建网页的原材料"
       id="toc-搭建网页的原材料">搭建网页的原材料</a></li>
       </ul></li>
-      <li><a href="#步骤" id="toc-步骤">步骤</a>
+      <li><a href="#构建步骤" id="toc-构建步骤">构建步骤</a>
       <ul>
-      <li><a href="#博客样式构建"
-      id="toc-博客样式构建">博客样式构建</a></li>
-      <li><a href="#博客首页搭建"
-      id="toc-博客首页搭建">博客首页搭建</a></li>
-      <li><a href="#仓库构建" id="toc-仓库构建">仓库构建</a></li>
-      <li><a href="#建立一个草稿分支"
-      id="toc-建立一个草稿分支">建立一个草稿分支</a></li>
+      <li><a href="#建立仓库" id="toc-建立仓库">建立仓库</a></li>
+      <li><a href="#建立草稿分支"
+      id="toc-建立草稿分支">建立草稿分支</a></li>
+      <li><a href="#构建博客样式"
+      id="toc-构建博客样式">构建博客样式</a></li>
+      <li><a href="#搭建博客首页"
+      id="toc-搭建博客首页">搭建博客首页</a></li>
+      <li><a href="#编写脚本" id="toc-编写脚本">编写脚本</a></li>
+      </ul></li>
+      <li><a href="#使用方式" id="toc-使用方式">使用方式</a>
+      <ul>
+      <li><a href="#编写md草稿文件"
+      id="toc-编写md草稿文件">编写md草稿文件</a></li>
+      <li><a href="#使用build.sh"
+      id="toc-使用build.sh">使用build.sh</a></li>
       </ul></li>
       </ul>
     </div>
@@ -139,13 +147,30 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       <li>CSS</li>
       </ul>
       <p>不涉及任何前端框架，纯原生。</p>
-      <h2 id="步骤">步骤</h2>
-      <h3 id="博客样式构建">博客样式构建</h3>
-      <p>新建一个文件夹build，文件夹内容： &gt; build:<br />
+      <h2 id="构建步骤">构建步骤</h2>
+      <h3 id="建立仓库">建立仓库</h3>
+      <p>在github上建立远程仓库的时候，将其命名为<code>&lt;你的github用户名&gt;.github.io</code>，这样github可以构建出一个静态网站出来。可以通过<code>https://&lt;你的github用户名&gt;.github.io/</code>访问到博客。</p>
+      <p>现在在本地，使用git进行仓库初始化，然后添加远程仓库。</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main <span class="co"># 确保主分支是 main</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/<span class="op">&lt;</span>你的github用户名<span class="op">&gt;</span>/<span class="op">&lt;</span>你的github用户名<span class="op">&gt;</span>.github.io.git</span></code></pre></div>
+      <h3 id="建立草稿分支">建立草稿分支</h3>
+      <p>建立一个草稿分支，用来专门存放md文件，这些md文件都是草稿。</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> draft</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main <span class="co"># 再切回main分支</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 可以把draft分支推送远程仓库，我这里没有推</span></span></code></pre></div>
+      <h3 id="构建博客样式">构建博客样式</h3>
+      <p>新建一个文件夹<code>build</code>，文件夹内容：</p>
+      <blockquote>
+      <p>build:<br />
       ├── font<br />
       ├── template1.css<br />
       ├── template1.html<br />
       └── template1.js</p>
+      </blockquote>
+      <p>其中<code>font</code>是：</p>
       <blockquote>
       <p>font:<br />
       ├── fontello.woff<br />
@@ -156,45 +181,45 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       <p>关于<code>template1.html</code>以及所有可以做pandoc模板的HTML文档的写法可参考<a
       href="https://www.koudingke.cn/docs/zh-Hans/pandoc-docs/latest/User-Guide/Templates#template-syntax">这里</a>。</p>
       <p>可以把形如<code>$var$</code>的变量写入HTML文档中，比如可以这样写：</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>$title$<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>$title$<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span></code></pre></div>
       <p>上面的代码相当于把其他文档或者传递给pandoc的变量写入到该HTML文档中。请看后面小节获取进一步信息。</p>
       <h4 id="自制小图标字体">自制小图标字体</h4>
       <p><code>font</code>文件夹下是小图标字体文件，可在<a
       href="https://fontello.com/">fontello</a>网站摘取，总共摘取三个。</p>
       <p>摘取后下载可获得一个压缩包，解压并找到其中的woff和woff2文件一般就可以了。这里我把两个文件都放在了<code>build</code>文件夹下的<code>font</code>文件夹。</p>
       <p>想要引入这个小图标字体，这里可以做一个参考：</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">@font-face</span> {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-family</span><span class="ch">:</span><span class="st">&quot;myicons&quot;</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">src</span><span class="ch">:</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url(</span><span class="st">font/fontello.woff2</span><span class="fu">)format(</span><span class="st">&quot;woff2&quot;</span><span class="fu">)</span><span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url(</span><span class="st">font/fontello.woff</span><span class="fu">)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format(</span><span class="st">&quot;woff&quot;</span><span class="fu">)</span><span class="op">;</span><span class="kw">font-weight</span><span class="ch">:</span><span class="dv">400</span><span class="op">;</span><span class="kw">font-style</span><span class="ch">:</span><span class="dv">normal</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="ss">class</span><span class="op">*=</span><span class="st">&quot; fa-&quot;</span><span class="ex">]</span><span class="op">,</span><span class="ex">[</span><span class="ss">class</span><span class="op">^=</span><span class="st">fa-</span><span class="ex">]</span> {</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-family</span><span class="ch">:</span> <span class="st">&quot;myicons&quot;</span><span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-style</span><span class="ch">:</span> <span class="dv">normal</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-weight</span><span class="ch">:</span> <span class="dv">400</span><span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    speak<span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span><span class="ch">:</span> <span class="dv">inline-block</span><span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">text-decoration</span><span class="ch">:</span> <span class="bu">inherit</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">.fa-home</span><span class="in">::before</span> {</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">content</span><span class="ch">:</span> <span class="st">&quot;/e800&quot;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">.fa-top</span><span class="in">::before</span> {</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">content</span><span class="ch">:</span> <span class="st">&quot;/e801&quot;</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">.fa-adjust</span><span class="in">::before</span> {</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">content</span><span class="ch">:</span> <span class="st">&quot;/e802&quot;</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">/* 如何知道是/e800还是什么呢？可以参考解压包中的几个css文件，找到类似的带有::before的写法 */</span></span></code></pre></div>
-      <h3 id="博客首页搭建">博客首页搭建</h3>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode css"><code class="sourceCode css"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">@font-face</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-family</span><span class="ch">:</span><span class="st">&quot;myicons&quot;</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">src</span><span class="ch">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url(</span><span class="st">font/fontello.woff2</span><span class="fu">)format(</span><span class="st">&quot;woff2&quot;</span><span class="fu">)</span><span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url(</span><span class="st">font/fontello.woff</span><span class="fu">)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format(</span><span class="st">&quot;woff&quot;</span><span class="fu">)</span><span class="op">;</span><span class="kw">font-weight</span><span class="ch">:</span><span class="dv">400</span><span class="op">;</span><span class="kw">font-style</span><span class="ch">:</span><span class="dv">normal</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="ss">class</span><span class="op">*=</span><span class="st">&quot; fa-&quot;</span><span class="ex">]</span><span class="op">,</span><span class="ex">[</span><span class="ss">class</span><span class="op">^=</span><span class="st">fa-</span><span class="ex">]</span> {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-family</span><span class="ch">:</span> <span class="st">&quot;myicons&quot;</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-style</span><span class="ch">:</span> <span class="dv">normal</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-weight</span><span class="ch">:</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    speak<span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span><span class="ch">:</span> <span class="dv">inline-block</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">text-decoration</span><span class="ch">:</span> <span class="bu">inherit</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">.fa-home</span><span class="in">::before</span> {</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">content</span><span class="ch">:</span> <span class="st">&quot;/e800&quot;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">.fa-top</span><span class="in">::before</span> {</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">content</span><span class="ch">:</span> <span class="st">&quot;/e801&quot;</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="fu">.fa-adjust</span><span class="in">::before</span> {</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">content</span><span class="ch">:</span> <span class="st">&quot;/e802&quot;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">/* 如何知道是/e800还是什么呢？可以参考解压包中的几个css文件，找到类似的带有::before的写法 */</span></span></code></pre></div>
+      <h3 id="搭建博客首页">搭建博客首页</h3>
       <p>新建了几个文件，像这样：</p>
       <blockquote>
       <p>.<br />
@@ -203,19 +228,105 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       ├── index.json<br />
       └── metadata.pandoc-tpl</p>
       </blockquote>
-      <p>文件<code>metadata.pandocc-tpl</code>就是辅助用的，它的内容只有<code>$meta-json$</code>；<code>index.json</code>是当前所有文章信息的json格式。请看后面小节获取进一步信息。</p>
-      <h3 id="仓库构建">仓库构建</h3>
-      <p>使用git进行仓库初始化，并提交所有的内容，最后推送到远程仓库中。</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;init blog&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main <span class="co"># 确保主分支是 main</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin <span class="op">&lt;</span>远程仓库URL<span class="op">&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div>
-      <p>建立远程github仓库的时候，将其命名为<code>&lt;你的用户名&gt;.github.io</code>，这样子github可以构建出一个静态网站出来。可以通过<code>https://&lt;你的用户名&gt;.github.io/</code>访问到博客。</p>
-      <h3 id="建立一个草稿分支">建立一个草稿分支</h3>
-      <p>（待续）</p>
+      <p>文件<code>metadata.pandocc-tpl</code>就是辅助用的，它的内容只有<code>$meta-json$</code>；<code>index.json</code>是当前所有文章信息的json格式。</p>
+      <blockquote>
+      <p>截至文章完成时我这个<code>index.html</code>的样式还是白的（</p>
+      </blockquote>
+      <p>最后把main分支上所有文件都提交推送即可。</p>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;init main branch&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout draft <span class="co"># 切到draft分支进行下一步</span></span></code></pre></div>
+      <h3 id="编写脚本">编写脚本</h3>
+      <p>现在来新建一个自动化脚本build.sh。可以把draft分支下的md文件（草稿）转为main分支下的html文件并推送，这样就可以在<code>https://&lt;你的github用户名&gt;.github.io/</code>上看到你新添加/修改的文章了。脚本内容如下：</p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;update </span><span class="va">$1</span><span class="st">.md&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout draft <span class="at">--</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span> <span class="at">-o</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.html&quot;</span> <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--template</span> <span class="st">&quot;./build/</span><span class="va">$2</span><span class="st">.html&quot;</span> <span class="dt">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--toc</span> <span class="at">--standalone</span> <span class="dt">\</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">${3</span><span class="op">:+</span>--syntax-highlighting=<span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span><span class="va">}</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span> <span class="at">--template</span><span class="op">=</span>metadata.pandoc-tpl <span class="at">--metadata</span> link=<span class="st">&quot;</span><span class="va">$1</span><span class="st">.html&quot;</span> <span class="dt">\</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/,$//&#39;</span> <span class="dt">\</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">jq</span> <span class="at">--argjson</span> new <span class="st">&quot;</span><span class="va">$(</span><span class="fu">cat</span><span class="va">)</span><span class="st">&quot;</span> <span class="st">&#39;[. + [$new] | sort_by(.link) | group_by(.link)[] | max_by(.date)]&#39;</span> index.json <span class="dt">\</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> index.json.tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> index.json.tmp index.json</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ex">jq</span> <span class="st">&#39;[sort_by(.link) | group_by(.link)[] | max_by(.date)]&#39;</span> index.json <span class="op">&gt;</span> index.tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> index.tmp index.json</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore <span class="at">--staged</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="st">&quot;</span><span class="va">$1</span><span class="st">.html&quot;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add index.json</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;update </span><span class="va">$1</span><span class="st">.html with index.json&quot;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout draft</span></code></pre></div>
+      <p>最后把改动提交即可。</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add build.sh</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;init draft branch by add build.sh&quot;</span></span></code></pre></div>
+      <h2 id="使用方式">使用方式</h2>
+      <h3 id="编写md草稿文件">编写md草稿文件</h3>
+      <p>关于md文件的语法可参考<a
+      href="https://www.markdownguide.org/">这里</a>。</p>
+      <p>要说的是： 1.
+      不用写h1标签（诸如<code># title</code>这种），从二级标签开始。 2.
+      要给每个md文件里写YAML元数据。</p>
+      <p>YAML元数据写在md文件开头，格式为：</p>
+      <div class="sourceCode" id="cb8"><pre
+      class="sourceCode txt"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>title: &quot;我如何搭建博客工作流？&quot; # h1大标签由这个title代替</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>author: &quot;mob_dolloge&quot;</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>date: &quot;2025-10-18&quot;</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>status: &quot;编辑中&quot;</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>---</span></code></pre></div>
+      <p>元数据中的每一项最好都写上，没有的数据pandoc也不会转换。</p>
+      <p>这个元数据的作用有两个：</p>
+      <h4
+      id="把元数据传递给template1.html模板">把元数据传递给template1.html模板</h4>
+      <p>对应的是build脚本中的这段代码：</p>
+      <div class="sourceCode" id="cb9"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span> <span class="at">-o</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.html&quot;</span> <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--template</span> <span class="st">&quot;./build/</span><span class="va">$2</span><span class="st">.html&quot;</span> <span class="dt">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--toc</span> <span class="at">--standalone</span> <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">${3</span><span class="op">:+</span>--syntax-highlighting=<span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span><span class="va">}</span></span></code></pre></div>
+      <p><code>template1.html</code>文件中充斥着<code>$var$</code>这样的代码。可截取一段代码来看看：</p>
+      <div class="sourceCode" id="cb10"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;$title$&quot;</span><span class="dt">&gt;</span>$title$<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    $if(author)$<span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>作者：$author$<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>$endif$</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    $if(date)$<span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>日期：$date$<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>$endif$</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    $if(status)$<span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>文章状态：$status$<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span>$endif$</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    $body$</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span></code></pre></div>
+      <p>其中<code>$author$</code>、<code>$date$</code>差不多和YAML元数据中的元素相当，<code>$body$</code>可以参考<a
+      href="https://www.koudingke.cn/docs/zh-Hans/pandoc-docs/latest/User-Guide/Templates#template-syntax">这里</a>。</p>
+      <h4 id="把元数据传递给index.json">把元数据传递给index.json</h4>
+      <p>对应的是这段代码：</p>
+      <div class="sourceCode" id="cb11"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">.md&quot;</span> <span class="at">--template</span><span class="op">=</span>metadata.pandoc-tpl <span class="at">--metadata</span> link=<span class="st">&quot;</span><span class="va">$1</span><span class="st">.html&quot;</span> <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/,$//&#39;</span> <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">jq</span> <span class="at">--argjson</span> new <span class="st">&quot;</span><span class="va">$(</span><span class="fu">cat</span><span class="va">)</span><span class="st">&quot;</span> <span class="st">&#39;[. + [$new] | sort_by(.link) | group_by(.link)[] | max_by(.date)]&#39;</span> index.json <span class="dt">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> index.json.tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> index.json.tmp index.json</span></code></pre></div>
+      <p>就是用pandoc提取md文件中YAML元数据，再补充一个叫link的元数据项（<code>--metadata link="$1.html"</code>），把所得元数据交给jq处理成json格式，输出到<code>index.json</code>。</p>
+      <h3 id="使用build.sh">使用build.sh</h3>
+      <p>通过命令<code>source build.sh &lt;草稿&gt; &lt;模板&gt; &lt;代码样式&gt;</code>，即可将转换后的内容推送到远程仓库。其中：
+      - <草稿>：md草稿文件的名字，记得不用带md后缀。 -
+      <模板>：要使用的模板，所有可用模板都在main分支下的build文件夹下，同样的这里不用带html后缀。目前只写了template1。
+      -
+      <代码样式>：有时候写md文件时会加代码块进去，转换为html文件时可以指定样式，推荐<strong>zenburn</strong>。</p>
     </main>
 
     <footer>
