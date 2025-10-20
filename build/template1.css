@@ -192,20 +192,10 @@ pre code {
     font-size: inherit
 }
 
-code.language-python {
-    color: #ffb86c
-}
-
-code.language-javascript {
-    color: #8be9fd
-}
-
-code.language-html {
-    color: #50fa7b
-}
-
-code.language-bash {
-    color: #f1fa8c
+.sourceCode span {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 h3,p,table {
@@ -483,7 +473,11 @@ nav .bar i[role=button][aria-pressed=true] {
 @media (max-width: 900px) {
   nav {
     min-width: unset;
-    max-width: 5%;
+    max-width: 3%;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    height: 50%;
   }
 
   nav .toc {
@@ -492,6 +486,5 @@ nav .bar i[role=button][aria-pressed=true] {
 
   nav .bar {
     flex-direction: column;
-    gap: 2rem;
   }
 }
