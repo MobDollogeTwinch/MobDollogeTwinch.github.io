@@ -1,5 +1,6 @@
 git add "$1.md"
 git commit -m "update $1.md"
+git push origin draft
 
 git checkout main
 git checkout draft -- "$1.md"
