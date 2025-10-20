@@ -1,7 +1,7 @@
-(function(){
+(function () {
   // 元素选择（若类名不同，可调整选择器）
   const homeBtn = document.querySelector('nav .bar .fa-home[role="button"]');
-  const topBtn  = document.querySelector('nav .bar .fa-top[role="button"]');
+  const topBtn = document.querySelector('nav .bar .fa-top[role="button"]');
   const themeBtn = document.querySelector('nav .bar .fa-adjust[role="button"]'); // 原 adjBtn
 
   // 帮助函数 - 键盘激活 (Enter / Space)
@@ -77,5 +77,14 @@
     if (e.key === 'Escape') {
       // 占位以便未来扩展
     }
+  });
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('*').forEach(el => {
+      const cs = getComputedStyle(el).transition;
+      el.style.transition = cs
+        ? cs + ', background-color 0.2s ease, color 0.5s ease'
+        : 'background-color 0.2s ease, color 0.5s ease';
+    });
   });
 })();

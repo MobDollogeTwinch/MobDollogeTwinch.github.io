@@ -39,36 +39,55 @@
 }
 
 :root.inverted {
-    --bg-color: #0f1113;
-    --text-color: #eaeaea;
-    --muted-color: #9ea6af;
-    --article-bg: #0b0c0d;
-    --card-shadow: 0 0 12px rgba(0,0,0,.35);
-    --heading-border: rgba(255,255,255,.06);
-    --link-color: #66aaff;
-    --link-hover-color: #93c7ff;
-    --blockquote-border: rgba(255,255,255,.06);
-    --blockquote-bg: #071018;
-    --blockquote-text: #c7d0d8;
-    --table-head-bg: rgba(255,255,255,.02);
-    --table-border: rgba(255,255,255,.04);
-    --table-row-even-bg: rgba(255,255,255,.01);
-    --inline-code-bg: #222529;
-    --inline-code-text: #eaeaea;
-    --pre-bg: #0f1113;
-    --pre-text: #f6f6f6;
-    --hr-color: rgba(255,255,255,.04);
-    --nav-bg: #0b0c0d;
-    --nav-text: #c5d7ee;
-    --nav-item-hover-bg: rgba(59,130,246,.06);
-    --nav-item-hover-color: #eaf3ff;
-    --nav-active-bg: linear-gradient(90deg, rgba(234,243,255,.04), rgba(255,255,255,.01));
-    --nav-active-border-left: rgba(59,130,246,.7);
-    --nav-active-color: #cfe6ff;
-    --bar-icon-color: #9aa1a8;
-    --bar-icon-hover-color: #dfe7ee;
-    --nav-shadow: 0 6px 18px rgba(0,0,0,.6);
-    --footnote-border: rgba(255,255,255,.06)
+    /* 背景和文章容器 */
+    --bg-color: #1c1e22;          /* 比原来 #0f1113 稍亮 */
+    --article-bg: #222528;        /* 比原来 #0b0c0d 稍柔和 */
+    
+    /* 文字和次要文字 */
+    --text-color: #e3e5e8;        /* 主文字稍淡，不刺眼 */
+    --muted-color: #a0a8b0;       /* 次要文字柔和灰色 */
+    
+    /* 卡片阴影 */
+    --card-shadow: 0 4px 12px rgba(0,0,0,.25); /* 比原来轻一些 */
+    
+    /* 标题和分割线 */
+    --heading-border: rgba(255,255,255,.08);
+    --hr-color: rgba(255,255,255,.08);
+    
+    /* 链接和悬停 */
+    --link-color: #7abaff;        /* 更柔和蓝色 */
+    --link-hover-color: #a3d0ff;
+    
+    /* 引用块 */
+    --blockquote-bg: #2a2e36;      /* 深灰偏蓝，更柔和 */
+    --blockquote-border: #3b4450;  /* 边框颜色与背景区分但不刺眼 */
+    --blockquote-text: #cfd6e0;    /* 柔和灰白，易读 */
+    
+    /* 表格 */
+    --table-head-bg: rgba(255,255,255,.05);
+    --table-border: rgba(255,255,255,.06);
+    --table-row-even-bg: rgba(255,255,255,.02);
+    
+    /* 代码块 */
+    --inline-code-bg: #2b2f34;
+    --inline-code-text: #e3e5e8;
+    --pre-bg: #1c1e22;
+    --pre-text: #e3e5e8;
+    
+    /* 导航栏 */
+    --nav-bg: #1f2228;
+    --nav-text: #d1d9e2;
+    --nav-item-hover-bg: rgba(59,130,246,.08);
+    --nav-item-hover-color: #e3e9f0;
+    --nav-active-bg: linear-gradient(90deg, rgba(234,243,255,.06), rgba(255,255,255,.02));
+    --nav-active-border-left: rgba(59,130,246,.5);
+    --nav-active-color: #cce0ff;
+    --bar-icon-color: #a4abb2;
+    --bar-icon-hover-color: #e0e7ef;
+    --nav-shadow: 0 4px 14px rgba(0,0,0,.35);
+    
+    /* 脚注 */
+    --footnote-border: rgba(255,255,255,.08);
 }
 
 body,html {
@@ -77,7 +96,7 @@ body,html {
     align-items: flex-start;
     gap: 1.3rem;
     margin: 1.3rem auto;
-    max-width: 1200px;
+    width: 94%;
     padding: 0 .3rem;
     font-family: "Fira Code",monospace;
     line-height: 1.6;
@@ -333,7 +352,7 @@ nav a {
     border-radius: 6px;
     font-size: .95rem;
     line-height: 1.4;
-    transition: background .15s,color .15s,transform .06s
+    transition: background .15s,color .15s
 }
 
 nav a:focus,nav a:hover {
@@ -472,12 +491,11 @@ nav .bar i[role=button][aria-pressed=true] {
 
 @media (max-width: 900px) {
   nav {
-    min-width: unset;
     position: fixed;
     z-index: 9999;
     right: 1rem;
     height: auto;
-    padding: 0.3rem;
+    padding: 0.6rem;
   }
 
   nav .toc {

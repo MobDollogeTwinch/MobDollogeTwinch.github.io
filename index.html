@@ -1,57 +1,62 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MOB的博客</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>索引页测试</title>
+
+  <meta name="author" content="mob_dolloge">
+  <link rel="stylesheet" href="build/template1.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  <h1>get_blog(__MOB__)</h1>
-
-  <div class="table">
-    <div class="header">
-      <div>标题</div>
-      <div>作者</div>
-      <div>日期</div>
-      <div>状态</div>
+  <nav>
+    <div class="toc" aria-label="目录">
+      <!-- <ul>
+        <li><a href="#筛选条件语" id="toc-筛选条件语">筛选条件：<code>语</code></a>
+          <ul>
+            <li><a href="#长岛语语法手册" id="toc-长岛语语法手册">长岛语语法手册</a></li>
+            <li><a href="#人造语言构建四步法以芙白岛语为例2.0" id="toc-人造语言构建四步法以芙白岛语为例2.0">人造语言构建四步法：以芙白岛语为例（2.0）</a></li>
+          </ul>
+        </li>
+        <li><a href="#筛选条件工作流" id="toc-筛选条件工作流">筛选条件：<code>工作流</code></a>
+          <ul>
+            <li><a href="#我如何搭建博客工作流" id="toc-我如何搭建博客工作流">我如何搭建博客工作流？</a></li>
+          </ul>
+        </li>
+      </ul> -->
     </div>
+    <div class="bar" role="navigation" aria-label="快速操作">
+      <i class="fa-home" role="button" tabindex="0" aria-label="首页"></i>
+      <i class="fa-top" role="button" tabindex="0" aria-label="回到顶部"></i>
+      <i class="fa-adjust" role="button" tabindex="0" aria-label="切换主题"></i>
+    </div>
+    <div class="filter_cond" aria-label="筛选框">
+      <div style="display: flex; align-items: center;">
+        <input placeholder="输入筛选条件" aria-label="输入筛选条件">
+        <i class="fa-top" role="button" tabindex="0" aria-label="回车"></i>
+      </div>
+      <label>筛选条件按空格分开，现只支持按标题筛选</label>
+    </div>
+  </nav>
 
-    <ul id="blog-list"></ul>
-  </div>
+  <article>
+    <header>
+      <h1>😎MOB的博客😎</h1>
+      <p>站长：mob_dolloge</p>
+    </header>
 
-  <script>
-    const ul = document.querySelector('#blog-list');
-    fetch('index.json')
-      .then(res => res.json())
-      .then(datas => datas.forEach(data => {
-        const li = document.createElement("li");
+    <main></main>
 
-        const a = document.createElement("a");
-        a.href = data.link;
-        a.textContent = data.title;
-        li.appendChild(a);
+    <footer>
+      <p>北新大陆标准信息交换局 &copy; 2025</p>
+    </footer>
+  </article>
 
-        const author = document.createElement("div");
-        author.textContent = data.author;
-        li.appendChild(author);
-
-        const date = document.createElement("div");
-        date.textContent = data.date;
-        li.appendChild(date);
-
-        const status = document.createElement("div");
-        status.textContent = data.status;
-        status.classList.add("status");
-        if (data.status.includes("完成")) status.classList.add("done");
-        if (data.status.includes("编辑")) status.classList.add("editing");
-        li.appendChild(status);
-
-        ul.appendChild(li);
-      }));
-  </script>
+  <script src="build/template1.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>

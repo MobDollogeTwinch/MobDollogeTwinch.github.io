@@ -1,0 +1,79 @@
+:root {
+  --bg-color: #f9f9fb;
+  --text-color: #222222;
+}
+
+:root.inverted {
+  --bg-color: #0f1113;
+  --text-color: #eaeaea;
+}
+
+/* ===== 筛选框整体容器 ===== */
+.filter_cond {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem 1rem 1rem;
+}
+
+/* ===== 输入框容器（相对定位） ===== */
+.filter_cond > div {
+  position: relative;
+  margin-top: 0.6rem;
+}
+
+/* ===== 输入框样式 ===== */
+.filter_cond input {
+  width: 100%;
+  border: 1px solid var(--text-color);
+  border-radius: 9999px;
+  padding: 0.5rem 2.2rem 0.5rem 1.2rem; /* 右边多留空间给图标 */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+/* 聚焦状态 */
+.filter_cond input:focus {
+  outline: none;
+}
+
+/* ===== 内嵌图标 ===== */
+.filter_cond i {
+  position: absolute;
+  right: 0.9rem;               /* 靠右放置 */
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+/* 悬停时轻微放大 */
+.filter_cond i:hover {
+  transform: translateY(-50%) translateX(3px) rotate(90deg);
+}
+
+/* ===== 说明文字 ===== */
+.filter_cond label {
+  font-size: .8rem;
+  margin: 0.6rem auto 0 auto;
+  text-align: center;
+}
+
+/* ===== 侧边栏宽度保持不变 ===== */
+nav {
+  flex: unset;
+  width: 30%;
+}
+
+nav .bar {
+  padding-bottom: unset;
+}
+
+@media (max-width: 900px) {
+  nav {
+    width: 45%;
+  }
+}
