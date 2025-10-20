@@ -473,11 +473,11 @@ nav .bar i[role=button][aria-pressed=true] {
 @media (max-width: 900px) {
   nav {
     min-width: unset;
-    max-width: 3%;
     position: fixed;
     z-index: 9999;
-    left: 0;
-    height: 50%;
+    right: 1rem;
+    height: auto;
+    padding: 0.3rem;
   }
 
   nav .toc {
@@ -485,6 +485,7 @@ nav .bar i[role=button][aria-pressed=true] {
   }
 
   nav .bar {
-    flex-direction: column;
+    padding-top: unset;
+    padding-bottom: unset;
   }
 }
