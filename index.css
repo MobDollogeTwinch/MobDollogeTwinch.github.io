@@ -8,20 +8,17 @@
   --text-color: #eaeaea;
 }
 
-/* ===== 筛选框整体容器 ===== */
 .filter_cond {
   display: flex;
   flex-direction: column;
   padding: 0 1rem 1rem 1rem;
 }
 
-/* ===== 输入框容器（相对定位） ===== */
 .filter_cond > div {
   position: relative;
   margin-top: 0.6rem;
 }
 
-/* ===== 输入框样式 ===== */
 .filter_cond input {
   width: 100%;
   border: 1px solid var(--text-color);
@@ -33,15 +30,13 @@
   transition: transform .12s ease, box-shadow .12s ease;
 }
 
-/* 聚焦状态 */
 .filter_cond input:focus {
   outline: none;
 }
 
-/* ===== 内嵌图标 ===== */
 .filter_cond i {
   position: absolute;
-  right: 0.9rem;               /* 靠右放置 */
+  right: 0.9rem;
   top: 50%;
   transform: translateY(-50%) rotate(90deg);
   color: var(--text-color);
@@ -50,22 +45,20 @@
   transition: transform 0.2s ease;
 }
 
-/* 悬停时轻微放大 */
 .filter_cond i:hover {
   transform: translateY(-50%) translateX(3px) rotate(90deg);
 }
 
-/* ===== 说明文字 ===== */
 .filter_cond label {
   font-size: .8rem;
   margin: 0.6rem auto 0 auto;
   text-align: center;
 }
 
-/* ===== 侧边栏宽度保持不变 ===== */
 nav {
   flex: unset;
   width: 30%;
+  transition: opacity 0.4s ease;
 }
 
 nav .bar {
@@ -73,7 +66,17 @@ nav .bar {
 }
 
 @media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  body * {
+    width: 100%;
+    flex: none;
+    box-sizing: border-box;
+  }
+
   nav {
-    width: 45%;
+    position: sticky
   }
 }
