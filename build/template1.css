@@ -98,7 +98,7 @@ body,html {
     margin: 1.3rem auto;
     width: 94%;
     padding: 0 .3rem;
-    font-family: "Fira Code",monospace;
+    font-family: 'Droid Sans Mono', 'monospace', monospace;
     line-height: 1.6;
     background-color: var(--bg-color)
 }

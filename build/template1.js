@@ -72,13 +72,6 @@
     });
   }
 
-  // 可选：按 Esc 关闭 tooltip 或收起
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      // 占位以便未来扩展
-    }
-  });
-
   window.addEventListener('load', () => {
     document.querySelectorAll('*').forEach(el => {
       const cs = getComputedStyle(el).transition;
