@@ -211,6 +211,10 @@ pre code {
     font-size: inherit
 }
 
+p code {
+    font-family: 'Droid Sans Mono', 'monospace', monospace;
+}
+
 .sourceCode span {
     white-space: pre-wrap;
     word-break: break-word;
@@ -303,7 +307,8 @@ footer,header {
 
 header p {
     text-align: center;
-    display: inline
+    display: inline;
+    margin-right: 2rem;
 }
 
 nav {
@@ -505,5 +510,9 @@ nav .bar i[role=button][aria-pressed=true] {
   nav .bar {
     padding-top: unset;
     padding-bottom: unset;
+  }
+
+  header p {
+    display: flex;
   }
 }
