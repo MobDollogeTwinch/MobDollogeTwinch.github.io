@@ -1,8 +1,8 @@
 ---
 title: "应动语态(Applicative)"
 author: "mob_dolloge"
-date: "2025-10-16"
-status: "编辑中"
+date: "2025-10-22"
+status: "已完成"
 ---
 
 > 转载翻译自网络
