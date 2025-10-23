@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++Primer习题</title>
+
+    <meta name="author" content="mob_dolloge">
+    <link rel="stylesheet" href="build/template1.css">
+    <style>html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
+  </head>
+
+<body>
+  <nav>
+    <div class="toc" aria-label="目录">
+      <ul>
+      <li><a href="#节习题" id="toc-节习题">11.2.1节习题</a>
+      <ul>
+      <li><a href="#练习11.5" id="toc-练习11.5">练习11.5</a></li>
+      <li><a href="#练习11.6" id="toc-练习11.6">练习11.6</a></li>
+      <li><a href="#练习11.7" id="toc-练习11.7">练习11.7</a></li>
+      <li><a href="#练习11.8" id="toc-练习11.8">练习11.8</a></li>
+      </ul></li>
+      </ul>
+    </div>
+
+    <div class="bar" role="navigation" aria-label="快速操作">
+      <i class="fa-home" role="button" tabindex="0" aria-label="首页"></i>
+      <i class="fa-top" role="button" tabindex="0" aria-label="回到顶部"></i>
+      <i class="fa-adjust" role="button" tabindex="0" aria-label="切换主题"></i>
+    </div>
+  </nav>
+
+  <article>
+    <header>
+      <h1 id="C++Primer习题">C++Primer习题</h1>
+      <p>作者：mob_dolloge</p>
+      
+      <p>日期：2025-10-23</p>
+      
+      <p>文章状态：编辑中</p>
+    </header>
+
+    <main>
+      <h2 id="节习题">11.2.1节习题</h2>
+      <h3 id="练习11.5">练习11.5</h3>
+      <blockquote>
+      <p>解释map和set的区别。你如何选择使用哪个？</p>
+      </blockquote>
+      <p>map和set都是关联容器，而且里面元素的关键字不能重复；但是map的元素不仅包括关键字还包括值，而set的元素只包括关键字，换句话说set的关键字就是set的值。</p>
+      <p>如果存储几组家庭人员信息，那么需要区分每条信息中哪些是电话号码哪些是姓名，就需要关键字来规定这些值的类别，可以使用map；而对于那些每一条数据都是一个类别的数据集，使用set存储更方便。</p>
+      <h3 id="练习11.6">练习11.6</h3>
+      <blockquote>
+      <p>解释set和list的区别。你如何选择使用哪个？</p>
+      </blockquote>
+      <p>list是顺序容器而set是关联容器，一些能用在顺序容器的操作无法用在set上。另外list一般支持重复元素，而set不支持。</p>
+      <p>所以，想要去重且不考虑顺序只是归类时，使用set会比较方便；如果想要实现一些更复杂的数据结构，用list会更好一点。</p>
+      <h3 id="练习11.7">练习11.7</h3>
+      <blockquote>
+      <p>定义一个map，关键字是家庭的姓，值是一个vector，保存家中孩子（们）的名。编写代码，实现添加新的家庭以及向已有家庭中添加新的孩子。</p>
+      </blockquote>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;map&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="bu">std::</span>map<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="bu">std::</span>string<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="bu">std::</span>vector<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    map<span class="op">&lt;</span>string<span class="op">,</span> vector<span class="op">&lt;</span>string<span class="op">&gt;&gt;</span> kid_name<span class="op">{};</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 添加新的家庭</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    kid_name<span class="op">.</span>insert<span class="op">({</span><span class="st">&quot;Zhang&quot;</span><span class="op">,</span> <span class="op">{}});</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 向已有家庭添加孩子名字</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    kid_name<span class="op">[</span><span class="st">&quot;Zhang&quot;</span><span class="op">].</span>emplace_back<span class="op">(</span><span class="st">&quot;Zixuan&quot;</span><span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+      <h3 id="练习11.8">练习11.8</h3>
+      <blockquote>
+      <p>编写一个程序，在一个vector而不是一个set中保存不重复的单词。使用set的优点是什么？</p>
+      </blockquote>
+      <p>使用set的优点是可以直接使用标准库提供的去重功能。如果不用set而用vector的话应该如下表示：</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span><span class="co">// std::find</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> words<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string word<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> word<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">auto</span> it <span class="op">=</span> <span class="bu">std::</span>find<span class="op">(</span>words<span class="op">.</span>begin<span class="op">(),</span> words<span class="op">.</span>end<span class="op">(),</span> word<span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>it <span class="op">==</span> words<span class="op">.</span>end<span class="op">())</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            words<span class="op">.</span>emplace_back<span class="op">(</span>word<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+    </main>
+
+    <footer>
+      <p>北新大陆标准信息交换局 &copy; 2025</p>
+    </footer>
+  </article>
+
+  <script src="build/template1.js"></script>
+</body>
+
+</html>
