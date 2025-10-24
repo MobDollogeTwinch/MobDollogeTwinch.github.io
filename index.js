@@ -145,7 +145,7 @@
       topUl.appendChild(outerLi);
     }
 
-    confirm_arrow.addEventListener('click', () => {
+    function handle_all() {
       main.innerHTML = ''
       toc.innerHTML = ''
       const main_frag = document.createDocumentFragment()
@@ -167,7 +167,12 @@
 
       main.appendChild(main_frag)
       toc.appendChild(toc_frag)
-    })
+    }
 
+    confirm_arrow.addEventListener('click', handle_all)
+
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') handle_all()
+    })
     confirm_arrow.click()
   })()
