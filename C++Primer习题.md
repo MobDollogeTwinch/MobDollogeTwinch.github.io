@@ -63,3 +63,28 @@ int main() {
     }
 }
 ```
+
+## 11.2.2节练习题
+
+### 练习11.9
+> 定义一个map，将单词与一个行号的list关联，list中保存的是单词出现的行号。
+
+```cpp
+std::map<std::string, std::list<std::size_t>> line_no;
+```
+
+### 练习11.10
+> 可以定义一个vector<int>::iterator到int的map吗？list<int>::iterator到int的map呢？对于这两种情况，如果不能，解释为什么？
+
+可以定义`vector<int>::iterator`到`int`，但是这不安全，因为vector添加元素后会导致内容迁移内存，原来的迭代器可能会失效，除非能保证vector不会再添加元素；而`list<int>::iterator`到`int`是完全可以的。
+
+### 练习11.11
+> 不使用decltype重新定义bookstore。其中：
+> bool compareIsbn(const Sales_data &lhs, const Sales_data &rhs) { ... }
+> multiset<Sales_data, decltype(compareIsbn) *> bookstore(compareIsbn);
+
+```cpp
+multiset<Sales_data, bool(*)(const Sales_data &, const Sales_data &)>
+bookstore(compareIsbn);
+// 不能传一个函数类型，传函数指针类型可以，因为函数类型无法被实例化，也无法构造对象
+```
