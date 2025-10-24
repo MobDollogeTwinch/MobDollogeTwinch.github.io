@@ -84,6 +84,12 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       <li><a href="#练习11.7" id="toc-练习11.7">练习11.7</a></li>
       <li><a href="#练习11.8" id="toc-练习11.8">练习11.8</a></li>
       </ul></li>
+      <li><a href="#节练习题" id="toc-节练习题">11.2.2节练习题</a>
+      <ul>
+      <li><a href="#练习11.9" id="toc-练习11.9">练习11.9</a></li>
+      <li><a href="#练习11.10" id="toc-练习11.10">练习11.10</a></li>
+      <li><a href="#练习11.11" id="toc-练习11.11">练习11.11</a></li>
+      </ul></li>
       </ul>
     </div>
 
@@ -158,6 +164,29 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            words<span class="op">.</span>emplace_back<span class="op">(</span>word<span class="op">);</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+      <h2 id="节练习题">11.2.2节练习题</h2>
+      <h3 id="练习11.9">练习11.9</h3>
+      <blockquote>
+      <p>定义一个map，将单词与一个行号的list关联，list中保存的是单词出现的行号。</p>
+      </blockquote>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>list<span class="op">&lt;</span><span class="bu">std::</span>size_t<span class="op">&gt;&gt;</span> line_no<span class="op">;</span></span></code></pre></div>
+      <h3 id="练习11.10">练习11.10</h3>
+      <blockquote>
+      <p>可以定义一个vector<int>::iterator到int的map吗？list<int>::iterator到int的map呢？对于这两种情况，如果不能，解释为什么？</p>
+      </blockquote>
+      <p>可以定义<code>vector&lt;int&gt;::iterator</code>到<code>int</code>，但是这不安全，因为vector添加元素后会导致内容迁移内存，原来的迭代器可能会失效，除非能保证vector不会再添加元素；而<code>list&lt;int&gt;::iterator</code>到<code>int</code>是完全可以的。</p>
+      <h3 id="练习11.11">练习11.11</h3>
+      <blockquote>
+      <p>不使用decltype重新定义bookstore。其中： bool compareIsbn(const
+      Sales_data &amp;lhs, const Sales_data &amp;rhs) { … }
+      multiset&lt;Sales_data, decltype(compareIsbn) *&gt;
+      bookstore(compareIsbn);</p>
+      </blockquote>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>multiset<span class="op">&lt;</span>Sales_data<span class="op">,</span> <span class="dt">bool</span><span class="op">(*)(</span><span class="at">const</span> Sales_data <span class="op">&amp;,</span> <span class="at">const</span> Sales_data <span class="op">&amp;)&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bookstore<span class="op">(</span>compareIsbn<span class="op">);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 不能传一个函数类型，传函数指针类型可以，因为函数类型无法被实例化，也无法构造对象</span></span></code></pre></div>
     </main>
 
     <footer>
