@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C++中不是对象类型的类型</title>
+
+    <meta name="author" content="mob_dolloge">
+    <link rel="stylesheet" href="build/template1.css">
+    <style>html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
+  </head>
+
+<body>
+  <nav>
+    <div class="toc" aria-label="目录">
+      <ul>
+      <li><a href="#一对象类型object-type"
+      id="toc-一对象类型object-type">🧩 一、对象类型（object
+      type）</a></li>
+      <li><a href="#二非对象类型non-object-type"
+      id="toc-二非对象类型non-object-type">🚫 二、非对象类型（non-object
+      type）</a>
+      <ul>
+      <li><a href="#例子-1函数类型不是对象类型"
+      id="toc-例子-1函数类型不是对象类型">🔹 例子
+      1：函数类型不是对象类型</a></li>
+      <li><a href="#例子-2引用类型不是对象类型"
+      id="toc-例子-2引用类型不是对象类型">🔹 例子
+      2：引用类型不是对象类型</a></li>
+      <li><a href="#例子-3void-不是对象类型"
+      id="toc-例子-3void-不是对象类型">🔹 例子 3：<code>void</code>
+      不是对象类型</a></li>
+      <li><a href="#例子-4抽象类不是对象类型"
+      id="toc-例子-4抽象类不是对象类型">🔹 例子
+      4：抽象类不是对象类型</a></li>
+      </ul></li>
+      <li><a href="#小结" id="toc-小结">🧠 小结</a></li>
+      </ul>
+    </div>
+
+    <div class="bar" role="navigation" aria-label="快速操作">
+      <i class="fa-home" role="button" tabindex="0" aria-label="首页"></i>
+      <i class="fa-top" role="button" tabindex="0" aria-label="回到顶部"></i>
+      <i class="fa-adjust" role="button" tabindex="0" aria-label="切换主题"></i>
+    </div>
+  </nav>
+
+  <article>
+    <header>
+      <h1 id="C++中不是对象类型的类型">C++中不是对象类型的类型</h1>
+      <p>作者：mob_dolloge</p>
+      
+      <p>日期：2025-10-24</p>
+      
+      <p>文章状态：已完成</p>
+    </header>
+
+    <main>
+      <h2 id="一对象类型object-type">🧩 一、对象类型（object type）</h2>
+      <p>👉 能够在内存中“占据空间”的类型。
+      你可以<strong>定义变量</strong>、<strong>取地址</strong>、<strong>存储在容器中</strong>的类型。</p>
+      <p>包括：</p>
+      <ul>
+      <li><strong>基本类型</strong>：<code>int</code>,
+      <code>double</code>, <code>char</code>, <code>bool</code> …</li>
+      <li><strong>枚举类型</strong>：<code>enum</code></li>
+      <li><strong>类类型</strong>：<code>struct</code>,
+      <code>class</code>, <code>union</code></li>
+      <li><strong>数组类型</strong>：<code>int[10]</code>（虽然不能拷贝，但仍是对象类型）</li>
+      <li><strong>指针类型</strong>：<code>int*</code>,
+      <code>void*</code></li>
+      <li><strong>引用包装类</strong>（比如
+      <code>std::reference_wrapper&lt;T&gt;</code>）</li>
+      </ul>
+      <p>✅ 都可以这样定义对象：</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">;</span>          <span class="co">// 基本类型</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> arr<span class="op">[</span><span class="dv">3</span><span class="op">];</span>     <span class="co">// 数组</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> S <span class="op">{}</span> s<span class="op">;</span>  <span class="co">// 类类型</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> p <span class="op">=</span> <span class="op">&amp;</span>a<span class="op">;</span>    <span class="co">// 指针</span></span></code></pre></div>
+      <hr />
+      <h2 id="二非对象类型non-object-type">🚫 二、非对象类型（non-object
+      type）</h2>
+      <p>👉 <strong>不能独立定义对象或实例</strong>的类型。
+      这些类型只存在于<strong>类型系统层面</strong>（比如函数声明、模板参数等）。</p>
+      <p>主要包括：</p>
+      <table>
+      <colgroup>
+      <col style="width: 22%" />
+      <col style="width: 29%" />
+      <col style="width: 48%" />
+      </colgroup>
+      <thead>
+      <tr>
+      <th>类型</th>
+      <th>说明</th>
+      <th>示例</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td><strong>函数类型</strong></td>
+      <td>代表函数本身的类型，但不能定义函数“变量”</td>
+      <td><code>int(int, double)</code></td>
+      </tr>
+      <tr>
+      <td><strong>引用类型</strong></td>
+      <td>引用不是对象，而是别名</td>
+      <td><code>int&amp;</code>, <code>const T&amp;</code></td>
+      </tr>
+      <tr>
+      <td><strong><code>void</code> 类型</strong></td>
+      <td>表示“无类型”</td>
+      <td><code>void</code></td>
+      </tr>
+      <tr>
+      <td><strong>抽象类类型</strong>（带纯虚函数）</td>
+      <td>不能直接实例化</td>
+      <td><code>struct A { virtual void f()=0; };</code></td>
+      </tr>
+      </tbody>
+      </table>
+      <hr />
+      <h3 id="例子-1函数类型不是对象类型">🔹 例子
+      1：函数类型不是对象类型</h3>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> func<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ 错误：函数类型不是对象类型</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">(</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">)</span> fobj<span class="op">;</span> <span class="co">// 编译错误</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ 正确：函数指针是对象类型</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">(*</span>pf<span class="op">)(</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">)</span> <span class="op">=</span> func<span class="op">;</span></span></code></pre></div>
+      <hr />
+      <h3 id="例子-2引用类型不是对象类型">🔹 例子
+      2：引用类型不是对象类型</h3>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">&amp;</span> ref <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ 错误：不能定义一个“引用的引用对象”</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">&amp;</span> r<span class="op">;</span> <span class="co">// 编译错误，引用必须绑定到已有对象</span></span></code></pre></div>
+      <p>引用只是对象的别名，不占用独立的内存。</p>
+      <hr />
+      <h3 id="例子-3void-不是对象类型">🔹 例子 3：<code>void</code>
+      不是对象类型</h3>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> v<span class="op">;</span> <span class="co">// ❌ 错误：void 不是对象类型</span></span></code></pre></div>
+      <p><code>void</code> 表示“没有类型”，用于函数返回值或指针
+      <code>void*</code>。</p>
+      <hr />
+      <h3 id="例子-4抽象类不是对象类型">🔹 例子
+      4：抽象类不是对象类型</h3>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Base <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">void</span> foo<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ 抽象类不能直接实例化</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Base b<span class="op">;</span> <span class="co">// 编译错误</span></span></code></pre></div>
+      <p>因为纯虚函数没有定义，编译器无法创建对象。</p>
+      <hr />
+      <h2 id="小结">🧠 小结</h2>
+      <table>
+      <thead>
+      <tr>
+      <th>类型类别</th>
+      <th>能否定义对象</th>
+      <th>举例</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>基本类型</td>
+      <td>✅</td>
+      <td><code>int a;</code></td>
+      </tr>
+      <tr>
+      <td>数组</td>
+      <td>✅（但不能复制）</td>
+      <td><code>int arr[5];</code></td>
+      </tr>
+      <tr>
+      <td>类/结构体</td>
+      <td>✅</td>
+      <td><code>MyClass obj;</code></td>
+      </tr>
+      <tr>
+      <td>指针</td>
+      <td>✅</td>
+      <td><code>int* p;</code></td>
+      </tr>
+      <tr>
+      <td>引用</td>
+      <td>❌</td>
+      <td><code>int&amp; r;</code></td>
+      </tr>
+      <tr>
+      <td>函数类型</td>
+      <td>❌</td>
+      <td><code>int(int,int)</code></td>
+      </tr>
+      <tr>
+      <td>void</td>
+      <td>❌</td>
+      <td><code>void</code></td>
+      </tr>
+      <tr>
+      <td>抽象类</td>
+      <td>❌</td>
+      <td><code>struct A { virtual f()=0; };</code></td>
+      </tr>
+      </tbody>
+      </table>
+    </main>
+
+    <footer>
+      <p>北新大陆标准信息交换局 &copy; 2025</p>
+    </footer>
+  </article>
+
+  <script src="build/template1.js"></script>
+</body>
+
+</html>
