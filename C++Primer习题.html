@@ -90,6 +90,19 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       <li><a href="#练习11.10" id="toc-练习11.10">练习11.10</a></li>
       <li><a href="#练习11.11" id="toc-练习11.11">练习11.11</a></li>
       </ul></li>
+      <li><a href="#节练习题-1" id="toc-节练习题-1">11.2.3节练习题</a>
+      <ul>
+      <li><a href="#练习11.12" id="toc-练习11.12">练习11.12</a></li>
+      <li><a href="#练习11.13" id="toc-练习11.13">练习11.13</a></li>
+      <li><a href="#练习11.14" id="toc-练习11.14">练习11.14</a></li>
+      </ul></li>
+      <li><a href="#节练习题-2" id="toc-节练习题-2">11.3.1节练习题</a>
+      <ul>
+      <li><a href="#练习11.15" id="toc-练习11.15">练习11.15</a></li>
+      <li><a href="#练习11.16" id="toc-练习11.16">练习11.16</a></li>
+      <li><a href="#练习11.17" id="toc-练习11.17">练习11.17</a></li>
+      <li><a href="#练习11.18" id="toc-练习11.18">练习11.18</a></li>
+      </ul></li>
       </ul>
     </div>
 
@@ -187,6 +200,105 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */</style>
       class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>multiset<span class="op">&lt;</span>Sales_data<span class="op">,</span> <span class="dt">bool</span><span class="op">(*)(</span><span class="at">const</span> Sales_data <span class="op">&amp;,</span> <span class="at">const</span> Sales_data <span class="op">&amp;)&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bookstore<span class="op">(</span>compareIsbn<span class="op">);</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 不能传一个函数类型，传函数指针类型可以，因为函数类型无法被实例化，也无法构造对象</span></span></code></pre></div>
+      <h2 id="节练习题-1">11.2.3节练习题</h2>
+      <h3 id="练习11.12">练习11.12</h3>
+      <blockquote>
+      <p>编写程序，读入string和int的序列，将每个string和int存入一个pair中，pair保存在一个vector中。</p>
+      </blockquote>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;utility&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>pair<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="dt">int</span><span class="op">&gt;&gt;</span> vec<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string vec1<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> vec2<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> vec1 <span class="op">&gt;&gt;</span> vec2<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        vec<span class="op">.</span>emplace_back<span class="op">({</span>vec1<span class="op">,</span> vec2<span class="op">});</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+      <h3 id="练习11.13">练习11.13</h3>
+      <blockquote>
+      <p>在上一题的程序中，至少有三种创建pair的方法。编写此程序的三个版本，分别采用不同的方法创建pair。解释你认为哪种形式最易于编写和理解，为什么？</p>
+      </blockquote>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 第一种</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vec<span class="op">.</span>emplace_back<span class="op">({</span>vec1<span class="op">,</span> vec2<span class="op">});</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 第二种</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>vec<span class="op">.</span>emplace_back<span class="op">(</span><span class="bu">std::</span>make_pair<span class="op">(</span>vec1<span class="op">,</span> vec2<span class="op">));</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// 第三种</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vec<span class="op">.</span>emplace_back<span class="op">(</span><span class="bu">std::</span>pair<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="dt">int</span><span class="op">&gt;(</span>vec1<span class="op">,</span> vec2<span class="op">));</span></span></code></pre></div>
+      <p>个人认为第二种更佳，因为既可以由代码本身知道是创建的pair，也比第三种写法更简便一些——特别是在复杂嵌套类型的情况下。当然如果代码清晰，那么使用第一种方式也可以，实际上也更佳简便。</p>
+      <h3 id="练习11.14">练习11.14</h3>
+      <blockquote>
+      <p>扩展你在11.2.1节练习中编写的孩子姓到名的map，添加一个pair的vector，保存孩子的名和生日。</p>
+      </blockquote>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;map&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;utility&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">using</span> Name_and_Birthday <span class="op">=</span> <span class="bu">std::</span>pair<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">using</span> Last_Name <span class="op">=</span> <span class="bu">std::</span>string<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">using</span> Kids <span class="op">=</span> <span class="bu">std::</span>map<span class="op">&lt;</span>Last_Name<span class="op">,</span> Name_and_Birthday<span class="op">&gt;;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    Kids kids<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 添加新的家庭</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    kids<span class="op">.</span>insert<span class="op">({</span><span class="st">&quot;Zhang&quot;</span><span class="op">,</span> <span class="op">{}});</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 向已有家庭添加孩子名字和生日</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    kids<span class="op">[</span><span class="st">&quot;Zhang&quot;</span><span class="op">].</span>emplace_back<span class="op">({</span><span class="st">&quot;zixuan&quot;</span><span class="op">,</span> <span class="st">&quot;2012-08-24&quot;</span><span class="op">});</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+      <h2 id="节练习题-2">11.3.1节练习题</h2>
+      <h3 id="练习11.15">练习11.15</h3>
+      <blockquote>
+      <p>对一个int到vector<int>的map，其mapped_type、key_type和value_type分别是什么？</p>
+      </blockquote>
+      <div class="sourceCode" id="cb8"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;map&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;type_traits&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;utility&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="dt">mapped_type</span> <span class="op">=</span> <span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;::</span><span class="dt">mapped_type</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="dt">key_type</span> <span class="op">=</span> <span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;::</span><span class="dt">key_type</span><span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="dt">value_type</span> <span class="op">=</span> <span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;::</span><span class="dt">value_type</span><span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> pair <span class="op">=</span> <span class="bu">std::</span>pair<span class="op">&lt;</span><span class="at">const</span> <span class="dt">int</span><span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">static_assert</span><span class="op">(</span><span class="bu">std::</span>is_same_v<span class="op">&lt;</span><span class="dt">mapped_type</span><span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>              <span class="bu">std::</span>is_same_v<span class="op">&lt;</span><span class="dt">key_type</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="bu">std::</span>is_same_v<span class="op">&lt;</span><span class="dt">value_type</span><span class="op">,</span> pair<span class="op">&gt;,</span> <span class="st">&quot;&quot;</span><span class="op">);</span> <span class="co">// true</span></span></code></pre></div>
+      <p>综上可知。</p>
+      <h3 id="练习11.16">练习11.16</h3>
+      <blockquote>
+      <p>使用一个map迭代器编写一个表达式，将一个值赋予一个元素。</p>
+      </blockquote>
+      <div class="sourceCode" id="cb9"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;map&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;::</span>iterator it<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;</span> <span class="va">m_map</span><span class="op">{{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">},</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}};</span><span class="co">// 例子</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  it <span class="op">=</span> <span class="va">m_map</span><span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  it<span class="op">-&gt;</span>second <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  it<span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+      <h3 id="练习11.17">练习11.17</h3>
+      <blockquote>
+      <p>假定c是一个string的multiset，v是一个string的vector，解释下面的调用，指出每个调用是否合法：<br />
+      copy(v.begin(), v.end(), inserter(c, c.end()));<br />
+      copy(v.begin(), v.end(), back_inserter(c));<br />
+      copy(c.begin(), c.end(), inserter(v, v.end()));<br />
+      copy(c.begin(), c.end(), back_inserter(v));</p>
+      </blockquote>
+      <p>除了第二个以外其它都合法，因为c是关联容器没有所谓前后，就不能使用back_inserter。</p>
+      <h3 id="练习11.18">练习11.18</h3>
+      <blockquote>
+      <p>写出第382页循环中map_it的类型，不要使用auto或者decltype。</p>
+      </blockquote>
+      <div class="sourceCode" id="cb10"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>map<span class="op">&lt;...,</span> <span class="op">...&gt;::</span>const_iterator</span></code></pre></div>
     </main>
 
     <footer>
