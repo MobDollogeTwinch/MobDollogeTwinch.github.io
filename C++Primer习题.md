@@ -88,3 +88,110 @@ multiset<Sales_data, bool(*)(const Sales_data &, const Sales_data &)>
 bookstore(compareIsbn);
 // 不能传一个函数类型，传函数指针类型可以，因为函数类型无法被实例化，也无法构造对象
 ```
+
+## 11.2.3节练习题
+
+### 练习11.12
+> 编写程序，读入string和int的序列，将每个string和int存入一个pair中，pair保存在一个vector中。
+
+```cpp
+#include <iostream>
+#include <utility>
+#include <vector>
+#include <string>
+int main() {
+    std::vector<std::pair<std::string, int>> vec;
+    std::string vec1;
+    int vec2;
+    while(std::cin >> vec1 >> vec2) {
+        vec.emplace_back({vec1, vec2});
+    }
+}
+```
+
+### 练习11.13
+> 在上一题的程序中，至少有三种创建pair的方法。编写此程序的三个版本，分别采用不同的方法创建pair。解释你认为哪种形式最易于编写和理解，为什么？
+
+```cpp
+// 第一种
+vec.emplace_back({vec1, vec2});
+// 第二种
+vec.emplace_back(std::make_pair(vec1, vec2));
+// 第三种
+vec.emplace_back(std::pair<std::string, int>(vec1, vec2));
+```
+个人认为第二种更佳，因为既可以由代码本身知道是创建的pair，也比第三种写法更简便一些——特别是在复杂嵌套类型的情况下。当然如果代码清晰，那么使用第一种方式也可以，实际上也更佳简便。
+
+### 练习11.14
+> 扩展你在11.2.1节练习中编写的孩子姓到名的map，添加一个pair的vector，保存孩子的名和生日。
+
+```cpp
+#include <map>
+#include <utility>
+#include <string>
+#include <vector>
+
+int main() {
+    using Name_and_Birthday = std::pair<std::string, std::string>;
+    using Last_Name = std::string;
+    using Kids = std::map<Last_Name, Name_and_Birthday>;
+    Kids kids;
+    // 添加新的家庭
+    kids.insert({"Zhang", {}});
+    // 向已有家庭添加孩子名字和生日
+    kids["Zhang"].emplace_back({"zixuan", "2012-08-24"});
+}
+```
+
+## 11.3.1节练习题
+
+### 练习11.15
+> 对一个int到vector<int>的map，其mapped_type、key_type和value_type分别是什么？
+
+```cpp
+#include <map>
+#include <type_traits>
+#include <utility>
+#include <vector>
+
+using mapped_type = std::map<int, std::vector<int>>::mapped_type;
+using key_type = std::map<int, std::vector<int>>::key_type;
+using value_type = std::map<int, std::vector<int>>::value_type;
+using pair = std::pair<const int, std::vector<int>>;
+
+static_assert(std::is_same_v<mapped_type, std::vector<int>> &&
+              std::is_same_v<key_type, int> &&
+              std::is_same_v<value_type, pair>, ""); // true
+```
+综上可知。
+
+### 练习11.16
+> 使用一个map迭代器编写一个表达式，将一个值赋予一个元素。
+
+```cpp
+#include <map>
+
+int main() {
+  std::map<int, int>::iterator it;
+  std::map<int, int> m_map{{1, 2}, {2, 3}};// 例子
+  it = m_map.begin();
+  it->second = 4;
+  it[5] = 6;
+}
+```
+
+### 练习11.17
+> 假定c是一个string的multiset，v是一个string的vector，解释下面的调用，指出每个调用是否合法：\
+> copy(v.begin(), v.end(), inserter(c, c.end()));\
+> copy(v.begin(), v.end(), back_inserter(c));\
+> copy(c.begin(), c.end(), inserter(v, v.end()));\
+> copy(c.begin(), c.end(), back_inserter(v));
+
+除了第二个以外其它都合法，因为c是关联容器没有所谓前后，就不能使用back_inserter。
+
+### 练习11.18
+> 写出第382页循环中map_it的类型，不要使用auto或者decltype。
+
+```cpp
+std::map<..., ...>::const_iterator
+```
