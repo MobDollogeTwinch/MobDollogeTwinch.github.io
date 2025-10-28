@@ -56,14 +56,6 @@
 
     // AIGC
     function handle_toc(kw, frag) {
-      // 清理字符串，生成适合作为 id 的字符串（保留中文、字母、数字、-_.）
-      function sanitizeForId(str) {
-        return String(str || '')
-          .trim()
-          .normalize('NFKC')
-          .replace(/\s+/g, '')
-          .replace(/[^0-9\p{L}\-_.]/gu, '') // 支持 unicode
-      }
 
       // Helper: 在 frag 中查找或创建顶层的 <ul>
       function getOrCreateTopUl(container) {
@@ -99,7 +91,7 @@
       const outerLi = document.createElement('li');
       const outerA = document.createElement('a');
       outerA.href = `#筛选条件${kw}`;
-      outerA.id = `toc-筛选条件${sanitizeForId(kw)}`;
+      outerA.id = `toc-筛选条件${kw}`;
       outerA.innerHTML = `筛选条件：<code>${kw}</code>`;
       outerLi.appendChild(outerA);
 
@@ -110,8 +102,7 @@
       blog_list
         .filter(article => article.title.includes(kw))
         .forEach(article => {
-          // 生成一个安全的 articleId
-          const articleId = sanitizeForId(article.title || `article${Date.now()}`);
+          const articleId = article.title;
 
           // 尝试在 main 中找到对应的 h3（以文本匹配）
           const h3Candidates = Array.from(main.querySelectorAll('h3'));
