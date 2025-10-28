@@ -7,7 +7,7 @@ git checkout draft -- "$1.md"
 
 pandoc "$1.md" -o "$1.html" \
   --template "./build/$2.html" \
-  --toc --toc-depth=4 --standalone \
+  --toc --toc-depth=5 --standalone \
   ${3:+--syntax-highlighting="$3"}
 
 pandoc "$1.md" --template=metadata.pandoc-tpl --metadata link="$1.html" \
