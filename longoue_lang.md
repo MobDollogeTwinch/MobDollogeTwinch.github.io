@@ -280,7 +280,7 @@ C...CVC...C\
 ##### 成音节辅音
 成音节辅音就是在没有元音时，辅音自己充当音节中心、能单独构成一个音节的辅音。由于响度等方面足够，听起来“就像带了元音一样”，所以可以把它们当成一个音节核。
 
-能作成音节辅音的音位有/m/、/n/、/l/。在一个单词中，如果这些音位**前后都没有元音或 [j]**，那么它们被看作成音节辅音。对于/l/，作成音节辅音时总是dark l。
+能作成音节辅音的音位有/m/、/n/、/l/。在一个单词中，如果这些音位**前后都没有元音、 [j] 或 [w]**，那么它们被看作成音节辅音。对于/l/，作成音节辅音时总是dark l。
 
 > Note:\
 以n举例，如果n是一个自为一个音节，在ipa中一般使用`[n̩]`表示。注意n底下那个小点。
@@ -470,7 +470,8 @@ mate 同伴\
 
   - 可用于一些复合词中每个词的连接。
 
-  - 行尾断字：若单词跨行，用连字符标示断开处。\
+  - 行尾断字：若单词跨行，用连字符标示断开处。
+
     > 例如：\
   ab-（这里发生了跨行）\
   cde.
@@ -741,10 +742,12 @@ plegeow就是“把……抄给”的意思。
 先后顺序的类型如下：
 
 - 后一个动成是前一个动成的目的。比如：
+
     > Mie goe bought dush.\
     我去买书。（bought“买”是goe“行动”的目的）
 
 - 后一个动成是前一个动成的结果。比如：
+
     > Zey look acken dragtose.
     他看懂了文档。（acken“知晓”是look“看”的结果）
 
@@ -849,9 +852,11 @@ Mie stood up plat.\
 实际上，动词不能直接作名成。有两个方式可以变通：
 
 - 前后补足成分构成一个完整结构。比如：
+
     > Mie like mie run.\
     我喜欢跑步。
 - 动词添加词缀`er`派生成名词。这和上一点相比，不考虑动作发出者等等。比如：
+
     > Mie like runer.\
     我喜欢跑步（跑步本身这一动作相关的东西，比如看跑步比赛或者我跑步等等……）。
 
@@ -1206,7 +1211,8 @@ Mie mom ate fast. Mie ate as.\
 可以对比一下下面两个例句：
 
 > Mie run fast if yor hooray mie.\
-如果你向我欢呼，我会跑得快。\
+如果你向我欢呼，我会跑得快。
+
 > Mie run fast and nugh and as if yor hooray mie no.\
 我现在跑得快——如果你不向我欢呼，我只能跑得像往常一样了。\
 当然可以写成：\
@@ -1268,7 +1274,7 @@ Mie drink wort in ketll.\
 
 还可以看看这个例子：
 
-> Mie goeing aver Beijing to Shanghai.
+> Mie goeing aver Beijing to Shanghai.\
 我从北京到上海。（注意goe末尾的e不是不发音的e，而是拼写单元oe的组成部分。回顾[拼写单元和音位](#拼写单元和音位)一节）
 
 to Shanghai（去上海）和aver Beijing（从北京）互为限定——从北京出发不去别的，就去的上海。
@@ -1390,7 +1396,7 @@ oick "oic'oic"-ow.\
 
 > Mie is Jack.\
 我是杰克。（当然有很多人叫杰克，jack这个名字不过是“我”的一个性质罢了）\
-> Dhe \*Kapitl\* is up box.\
+Dhe \*Kapitl\* is up box.\
 《资本论》在箱子上。（这只是这本书现在在的地方，没有什么限定的意思）
 
 可以用下面这种句子强调某事物的特征：
@@ -1424,7 +1430,7 @@ Wort is sey glansow.\
 > Mie Jack bee.\
 我是那个杰克。（有点类似于老师点名的场景，需要指出班级里几个杰克中我才是老师要的那个）\
 Karl Marx dush, dhe \*Kapitl\* bee.\
-《资本论》是卡尔马克思的书。（《资本论》不是别人写的，正是马克思本尊）\
+《资本论》是卡尔马克思的书。（《资本论》不是别人写的，正是马克思本尊）
 
 或者你可以用介词uf，比如：
 
@@ -1456,12 +1462,12 @@ Dhis Annah runing up rund bee.\
 
 表达“红墙”的成分是`laggin is reed (got laggin，这里被省略了)`，还原回来是`laggin is laggin reed`。is后面没有接宾语——很明显is这里是被动义，而got的成分都被省略了。当然，长岛语的趋势是is慢慢地可以省略了——就像一些形容词后置的语言一样。比如：
 
-> Mie like dhis laggin soe blank.
+> Mie like dhis laggin soe blank.\
 我喜欢这堵很白的墙。（is被省略，看起来和别的语言一样）
 
 但是在复杂的结构中省略可能不太好，写出来可能才知道谁是谁。比如：
 
-> Mie like dhis poika is wrid culor reed and is clad face.
+> Mie like dhis poika is wrid culor reed and is clad face.\
 我喜欢这个身着红色衣服，脸上挂着笑容的男孩。
 
 ##### 限定类修饰
