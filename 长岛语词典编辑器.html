@@ -76,7 +76,6 @@
       --button-hover: #2c2c2c;
     }
 
-
     .container {
       width: 60%;
       max-width: 56.25rem;
@@ -283,7 +282,7 @@
         <label>词性（下拉）：
           <select id="posSelect">
             <option>名词</option>
-            <option>复数原形名词</option>
+            <option>复数名词</option>
             <option>个体量词</option>
             <option>成双量词</option>
             <option>集体量词</option>
@@ -291,9 +290,9 @@
             <option>不及物动词</option>
             <option>副词</option>
             <option>数词</option>
-            <option>承接名词性成分的连词</option>
-            <option>承接动词性成分的连词</option>
-            <option>承接副词性成分的连词</option>
+            <option>承名连词</option>
+            <option>承动连词</option>
+            <option>承副连词</option>
             <option>冠词</option>
             <option>代词</option>
             <option>介词</option>
@@ -346,7 +345,7 @@
 
     function updateInflEditable() {
       const v = posSelect.value;
-      inflInput.disabled = !(v === '复数原形名词' || v === '不及物动词');
+      inflInput.disabled = !(v === '复数名词' || v === '不及物动词');
       if (inflInput.disabled) inflInput.value = '';
     }
     posSelect.addEventListener('change', updateInflEditable);
@@ -385,22 +384,110 @@
     });
 
     exportBtn.addEventListener('click', () => {
-      const lines = entries.map(e => `${e.pos} ${e.def} ${e.spell}${e.infl ? ' ' + e.infl : ''}`);
+      const lines = entries.map(e =>
+        `${e.pos} ${e.def} ${e.spell}${e.infl ? ' ' + e.infl : ''}`
+      );
       const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
-      const filename = 'lexicon.longo';
-      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
+
+      // ✅ 提示用户输入文件名
+      const filename = prompt('请输入要保存的文件名（以 .longo 结尾）：', 'lexicon.longo');
+      if (!filename) return;
+      if (!filename.endsWith('.longo')) {
+        alert('文件名必须以 .longo 结尾！');
+        return;
+      }
+
+      // ✅ 创建下载链接并触发浏览器“保存为”窗口
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
     });
 
     function normalizeSpell(s) { return s ? s.replace(/\([^)]*\)/g, '').replace(/[+\-]/g, '').replace(/\s+/g, '').toLowerCase() : ''; }
     function isSpellQuery(q) { return /^[A-Za-z']+$/.test(q); }
 
     function doSearch() {
-      const q = searchInput.value.trim(); resultsList.innerHTML = ''; const res = [];
-      if (!q) { entries.forEach(it => res.push(it)); }
-      else { const spellSearch = isSpellQuery(q); if (spellSearch) { const nq = normalizeSpell(q); for (const it of entries) { if (normalizeSpell(it.spell).includes(nq)) res.push(it); } } else { for (const it of entries) { if (it.def.indexOf(q) !== -1) res.push(it); } } }
+      const q = searchInput.value.trim();
+      resultsList.innerHTML = '';
+      const res = [];
+
+      if (!q) {
+        res.push(...entries);
+      } else {
+        const spellSearch = isSpellQuery(q);
+        if (spellSearch) {
+          const nq = normalizeSpell(q);
+          for (const it of entries) {
+            if (normalizeSpell(it.spell).includes(nq)) res.push(it);
+          }
+        } else {
+          for (const it of entries) {
+            if (it.def.includes(q)) res.push(it);
+          }
+        }
+      }
+
       resultsCount.textContent = '条目数: ' + res.length;
-      if (res.length === 0) { const li = document.createElement('li'); li.textContent = '无匹配结果'; resultsList.appendChild(li); }
-      else { res.forEach(it => { const li = document.createElement('li'); li.textContent = `[${it.pos}] ${it.def} -> ${it.spell}${it.infl ? ' ' + it.infl : ''}`; const del = document.createElement('span'); del.textContent = '删除'; del.className = 'delete-btn'; del.addEventListener('click', e => { e.stopPropagation(); const idx = entries.findIndex(e2 => e2.pos === it.pos && e2.def === it.def && e2.spell === it.spell); if (idx >= 0) { entries.splice(idx, 1); doSearch(); } }); li.appendChild(del); li.addEventListener('click', () => { spellInput.value = it.spell; defInput.value = it.def; posSelect.value = it.pos; inflInput.value = it.infl || ''; updateInflEditable(); }); resultsList.appendChild(li); }); }
+
+      if (res.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = '无匹配结果';
+        resultsList.appendChild(li);
+        return;
+      }
+
+      const MAX_LEN = 18; // ✅ 最长显示字符数（可调）
+
+      res.forEach(it => {
+        const li = document.createElement('li');
+
+        // 拼装文字内容
+        let text = `[${it.pos}] ${it.def} -> ${it.spell}${it.infl ? ' ' + it.infl : ''}`;
+
+        // ✅ 超长自动截断
+        if (text.length > MAX_LEN) {
+          text = text.slice(0, MAX_LEN - 1) + '…';
+        }
+
+        const textSpan = document.createElement('span');
+        textSpan.className = 'entry-text';
+        textSpan.textContent = text;
+
+        // 悬停时显示完整内容
+        textSpan.title = `[${it.pos}] ${it.def} -> ${it.spell}${it.infl ? ' ' + it.infl : ''}`;
+
+        li.appendChild(textSpan);
+
+        // 删除按钮
+        const del = document.createElement('span');
+        del.textContent = '删除';
+        del.className = 'delete-btn';
+        del.addEventListener('click', e => {
+          e.stopPropagation();
+          const idx = entries.findIndex(
+            e2 => e2.pos === it.pos && e2.def === it.def && e2.spell === it.spell
+          );
+          if (idx >= 0) {
+            entries.splice(idx, 1);
+            doSearch();
+          }
+        });
+        li.appendChild(del);
+
+        // 点击条目填充输入框
+        li.addEventListener('click', () => {
+          spellInput.value = it.spell;
+          defInput.value = it.def;
+          posSelect.value = it.pos;
+          inflInput.value = it.infl || '';
+          updateInflEditable();
+        });
+
+        resultsList.appendChild(li);
+      });
     }
 
     searchInput.addEventListener('compositionstart', () => composing = true);
