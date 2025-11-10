@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>长岛语词典编辑器</title>
+  <script>
+    try {
+      if (localStorage.getItem('site:nightMode') === '1') {
+        document.documentElement.classList.add('inverted');
+      }
+    } catch (e) { }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', Arial;
+      color: var(--text-color, #222);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      font-size: 1rem;
+      background-color: var(--bg-color, #fff);
+      transition: background-color 0.2s ease, color 0.5s ease;
+    }
+
+    :root {
+      --bg-color: #f9f9fb;
+      --text-color: #222222;
+      --container-bg: #ffffff;
+      --container-border: #eeeeee;
+      --container-shadow: rgba(0,0,0,.05);
+      --input-bg: #f3f3f3;
+      --input-text: #222222;
+      --button-bg: #ffffff;
+      --button-text: #222222;
+      --bar-icon-color: #797d84;
+      --bar-icon-hover: #4a505a;
+      --results-bg: #fafafa;
+      --results-border: #dddddd;
+      --li-bg: #ffffff;
+      --li-hover: #f6f6f6;
+      --button-hover: #ececec;
+    }
+
+    :root.inverted {
+      --bg-color: #1c1e22;
+      --text-color: #e3e5e8;
+      --container-bg: #222528;
+      --container-border: rgba(255,255,255,.08);
+      --container-shadow: rgba(0,0,0,.25);
+      --input-bg: #2b2f34;
+      --input-text: #e3e5e8;
+      --button-bg: #1f2228;
+      --button-text: #e3e5e8;
+      --bar-icon-color: #a4abb2;
+      --bar-icon-hover: #e0e7ef;
+      --results-bg: #2a2e36;
+      --results-border: #3b4450;
+      --li-bg: #2a2e36;
+      --li-hover: #33343a;
+      --button-hover: #2c2c2c;
+    }
+
+
+    .container {
+      width: 60%;
+      max-width: 56.25rem;
+      margin: 2rem auto;
+      background: var(--container-bg);
+      border-radius: 1.125rem;
+      padding: 1.25rem;
+      box-shadow: 0 1.25rem 2.5rem var(--container-shadow);
+      border: 0.0625rem solid var(--container-border);
+      min-height: calc(100vh - 4rem);
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.2s ease, color 0.5s ease;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 0.875rem;
+      color: var(--text-color);
+      transition: color 0.5s ease;
+    }
+
+    .cols {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: center;
+      flex: 1 1 auto;
+    }
+
+    #leftCol,
+    #rightCol {
+      flex: 1 1 20rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      min-height: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-color);
+    }
+
+    input,
+    select {
+      outline: 0;
+      width: 100%;
+      padding: 0.375rem;
+      border: 0.0625rem solid #cfcfcf;
+      border-radius: 0.5rem;
+      background: var(--input-bg);
+      color: var(--input-text);
+      transition: background-color 0.2s ease, color 0.5s ease;
+    }
+
+    button {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 0.0625rem solid #bbb;
+      background: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.5s ease;
+    }
+
+    button:hover {
+      background: var(--button-hover);
+    }
+
+    .bar i[role=button] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.125rem;
+      transition: transform .12s ease, background .12s ease, color 0.5s ease;
+      color: var(--bar-icon-color);
+      -webkit-tap-highlight-color: transparent
+    }
+
+    .bar i[role=button]:hover {
+      background: rgba(37, 64, 106, .06);
+      transform: translateY(-0.1875rem);
+      outline: 0;
+      box-shadow: 0 0.375rem 0.875rem rgba(17, 17, 18, .04);
+      color: var(--bar-icon-hover);
+    }
+
+    .bar i[role=button]:focus-visible {
+      box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, .12), 0 0.375rem 0.875rem rgba(17, 17, 18, .03)
+    }
+
+    .bar i[role=button]:active {
+      transform: translateY(0);
+      background: rgba(37, 64, 106, .09)
+    }
+
+    .button-row {
+      display: flex;
+      gap: 0.625rem;
+    }
+
+    .button-row button {
+      flex: 1;
+    }
+
+    #resultsCount {
+      font-size: 0.875rem;
+      color: var(--text-color);
+      margin-bottom: 0.25rem;
+      transition: color 0.5s ease;
+    }
+
+    #resultsList {
+      list-style: none;
+      padding: 0.5rem;
+      margin: 0.375rem 0;
+      border: 0.0625rem solid var(--results-border);
+      border-radius: 0.5rem;
+      background: var(--results-bg);
+      overflow: auto;
+      flex: 1 1 auto;
+      max-height: 25vh;
+      transition: background-color 0.2s ease;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.375rem 0.5rem;
+      border-bottom: 0.0625rem solid #f0f0f0;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.5s ease;
+    }
+
+    li:hover {
+      background: var(--li-hover)
+    }
+
+    .delete-btn {
+      border: 0.0625rem solid #e06d6d;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem
+    }
+
+    @font-face {
+      font-family: "myicons";
+      src: url(build/font/fontello.woff2) format("woff2"), url(build/font/fontello.woff) format("woff");
+      font-weight: 400;
+      font-style: normal
+    }
+
+    [class*=" fa-"],
+    [class^=fa-] {
+      font-family: "myicons";
+      font-style: normal;
+      font-weight: 400;
+      display: inline-block;
+      text-decoration: inherit
+    }
+
+    .fa-home::before {
+      content: ""
+    }
+
+    .fa-adjust::before {
+      content: ""
+    }
+
+    @media (max-width:56.25rem) {
+      .container {
+        width: 90%;
+        padding: 1rem;
+      }
+
+      .cols {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>长岛语词典编辑器</h1>
+
+    <div class="cols">
+      <div id="leftCol">
+        <h2 style="text-align:center;font-size:1.05rem;margin-bottom:0.375rem;color:var(--text-color)">输入单词</h2>
+
+        <label>拼写：<input id="spellInput" type="text" autocomplete="off"></label>
+        <label>释义：<input id="defInput" type="text"></label>
+        <label>词性（下拉）：
+          <select id="posSelect">
+            <option>名词</option>
+            <option>复数原形名词</option>
+            <option>个体量词</option>
+            <option>成双量词</option>
+            <option>集体量词</option>
+            <option>及物动词</option>
+            <option>不及物动词</option>
+            <option>副词</option>
+            <option>数词</option>
+            <option>承接名词性成分的连词</option>
+            <option>承接动词性成分的连词</option>
+            <option>承接副词性成分的连词</option>
+            <option>冠词</option>
+            <option>代词</option>
+            <option>介词</option>
+            <option>叹词</option>
+          </select>
+        </label>
+        <label>屈折变化（可选）：<input id="inflInput" type="text"></label>
+
+        <div class="button-row">
+          <button id="addBtn">添加 / 更新</button>
+          <button id="clearBtn">清空输入</button>
+        </div>
+
+        <div class="bar" role="navigation" aria-label="快速操作">
+          <i class="fa-home" role="button" tabindex="0" aria-label="首页"></i>
+          <i class="fa-adjust" role="button" tabindex="0" aria-label="切换主题"></i>
+        </div>
+      </div>
+
+      <div id="rightCol">
+        <h2 style="text-align:center;font-size:1.05rem;margin-bottom:0.375rem;color:var(--text-color)">单词列表 / 搜索</h2>
+
+        <label>搜索：<input id="searchInput" type="text" autocomplete="off"></label>
+        <div id="resultsCount">条目数: 0</div>
+        <ul id="resultsList"></ul>
+
+        <label>导入文件：<input id="fileInput" type="file" accept=".longo"></label>
+        <button id="exportBtn">导出为文件</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------------------ 词典核心逻辑 ------------------
+    const entries = [];
+    const fileInput = document.getElementById('fileInput');
+    const exportBtn = document.getElementById('exportBtn');
+    const posSelect = document.getElementById('posSelect');
+    const defInput = document.getElementById('defInput');
+    const spellInput = document.getElementById('spellInput');
+    const inflInput = document.getElementById('inflInput');
+    const addBtn = document.getElementById('addBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const searchInput = document.getElementById('searchInput');
+    const resultsList = document.getElementById('resultsList');
+    const resultsCount = document.getElementById('resultsCount');
+
+    let composing = false;
+
+    function updateInflEditable() {
+      const v = posSelect.value;
+      inflInput.disabled = !(v === '复数原形名词' || v === '不及物动词');
+      if (inflInput.disabled) inflInput.value = '';
+    }
+    posSelect.addEventListener('change', updateInflEditable);
+    updateInflEditable();
+
+    function parseFile(text) {
+      const lines = text.split(/\r?\n/);
+      const parsed = [];
+      for (const raw of lines) {
+        const line = raw.trim(); if (!line) continue;
+        const tokens = line.split(/\s+/);
+        if (tokens.length < 3) continue;
+        const pos = tokens[0], def = tokens[1], spell = tokens[2];
+        const infl = tokens.length > 3 ? tokens.slice(3).join(' ') : '';
+        parsed.push({ pos, def, spell, infl });
+      }
+      return parsed;
+    }
+
+    fileInput.addEventListener('change', function (e) {
+      const f = e.target.files[0]; if (!f) return;
+      if (!f.name.endsWith('.longo')) { alert('文件格式不合法，必须以 .longo 结尾'); e.target.value = ''; return; }
+      const reader = new FileReader();
+      reader.onload = function (ev) { const parsed = parseFile(ev.target.result); entries.length = 0; parsed.forEach(x => entries.push(x)); doSearch(); alert('导入完成，已加载 ' + parsed.length + ' 条目'); };
+      reader.readAsText(f, 'utf-8');
+    });
+
+    clearBtn.addEventListener('click', () => { posSelect.value = '名词'; defInput.value = ''; spellInput.value = ''; inflInput.value = ''; updateInflEditable(); });
+
+    addBtn.addEventListener('click', () => {
+      const pos = posSelect.value.trim(), def = defInput.value.trim(), spell = spellInput.value.trim(), infl = inflInput.value.trim();
+      if (!pos || !def || !spell) { alert('拼写、释义、词性为必填项'); return; }
+      const idx = entries.findIndex(e => e.pos === pos && e.def === def && e.spell === spell);
+      if (idx >= 0) entries[idx].infl = infl; else entries.push({ pos, def, spell, infl });
+      doSearch();
+    });
+
+    exportBtn.addEventListener('click', () => {
+      const lines = entries.map(e => `${e.pos} ${e.def} ${e.spell}${e.infl ? ' ' + e.infl : ''}`);
+      const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+      const filename = 'lexicon.longo';
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
+    });
+
+    function normalizeSpell(s) { return s ? s.replace(/\([^)]*\)/g, '').replace(/[+\-]/g, '').replace(/\s+/g, '').toLowerCase() : ''; }
+    function isSpellQuery(q) { return /^[A-Za-z']+$/.test(q); }
+
+    function doSearch() {
+      const q = searchInput.value.trim(); resultsList.innerHTML = ''; const res = [];
+      if (!q) { entries.forEach(it => res.push(it)); }
+      else { const spellSearch = isSpellQuery(q); if (spellSearch) { const nq = normalizeSpell(q); for (const it of entries) { if (normalizeSpell(it.spell).includes(nq)) res.push(it); } } else { for (const it of entries) { if (it.def.indexOf(q) !== -1) res.push(it); } } }
+      resultsCount.textContent = '条目数: ' + res.length;
+      if (res.length === 0) { const li = document.createElement('li'); li.textContent = '无匹配结果'; resultsList.appendChild(li); }
+      else { res.forEach(it => { const li = document.createElement('li'); li.textContent = `[${it.pos}] ${it.def} -> ${it.spell}${it.infl ? ' ' + it.infl : ''}`; const del = document.createElement('span'); del.textContent = '删除'; del.className = 'delete-btn'; del.addEventListener('click', e => { e.stopPropagation(); const idx = entries.findIndex(e2 => e2.pos === it.pos && e2.def === it.def && e2.spell === it.spell); if (idx >= 0) { entries.splice(idx, 1); doSearch(); } }); li.appendChild(del); li.addEventListener('click', () => { spellInput.value = it.spell; defInput.value = it.def; posSelect.value = it.pos; inflInput.value = it.infl || ''; updateInflEditable(); }); resultsList.appendChild(li); }); }
+    }
+
+    searchInput.addEventListener('compositionstart', () => composing = true);
+    searchInput.addEventListener('compositionend', () => { composing = false; doSearch(); });
+    searchInput.addEventListener('input', () => { if (!composing) doSearch(); });
+
+    doSearch();
+
+    // ------------------ fa-home 和 fa-adjust ------------------
+    const homeBtn = document.querySelector('.bar .fa-home[role="button"]');
+    const themeBtn = document.querySelector('.fa-adjust');
+
+    function bindKeyboardActivation(el) {
+      if (!el) return;
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    }
+
+    // home
+    if (homeBtn) {
+      bindKeyboardActivation(homeBtn);
+      homeBtn.addEventListener('click', () => {
+        const _ = homeBtn.closest('_');
+        const custom = _ && _.getAttribute('data-home');
+        const dest = custom || '/';
+        window.location.href = dest;
+      });
+    }
+
+    // 主题记忆和切换
+    const THEME_KEY = 'site:nightMode';
+    function applyTheme(dark) {
+      if (dark) {
+        document.documentElement.classList.add('inverted');
+        themeBtn && themeBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        document.documentElement.classList.remove('inverted');
+        themeBtn && themeBtn.setAttribute('aria-pressed', 'false');
+      }
+    }
+
+    if (themeBtn) {
+      // 初始化 aria-pressed
+      if (!themeBtn.hasAttribute('aria-pressed')) themeBtn.setAttribute('aria-pressed', 'false');
+      bindKeyboardActivation(themeBtn);
+
+      // 恢复上次状态
+      try {
+        const last = localStorage.getItem(THEME_KEY);
+        if (last === '1') applyTheme(true);
+      } catch (e) { /* ignore storage errors */ }
+
+      themeBtn.addEventListener('click', () => {
+        const isOn = themeBtn.getAttribute('aria-pressed') === 'true';
+        applyTheme(!isOn);
+        try {
+          localStorage.setItem(THEME_KEY, !isOn ? '1' : '0');
+        } catch (err) { /* ignore */ }
+      });
+    }
+
+    // 页面加载完成后给所有元素添加平滑过渡动画
+    window.addEventListener('load', () => {
+      document.querySelectorAll('*').forEach(el => {
+        const cs = getComputedStyle(el).transition;
+        el.style.transition = cs
+          ? cs + ', background-color 0.2s ease, color 0.5s ease'
+          : 'background-color 0.2s ease, color 0.5s ease';
+      });
+    });
+  </script>
+</body>
+
+</html>

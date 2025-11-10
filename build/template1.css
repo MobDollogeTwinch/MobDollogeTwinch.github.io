@@ -473,7 +473,7 @@ nav .bar i[role=button] {
     -webkit-tap-highlight-color: transparent
 }
 
-nav .bar i[role=button]:focus,nav .bar i[role=button]:hover {
+nav .bar i[role=button]:hover {
     background: var(--nav-item-hover-bg);
     transform: translateY(-3px);
     outline: 0;
@@ -487,11 +487,6 @@ nav .bar i[role=button]:focus-visible {
 nav .bar i[role=button]:active {
     transform: translateY(0);
     background: rgba(37,64,106,.09)
-}
-
-nav .bar i[role=button][aria-pressed=true] {
-    border: 2px solid rgba(59,130,246,.18);
-    color: var(--nav-active-color)
 }
 
 @media (max-width: 900px) {
