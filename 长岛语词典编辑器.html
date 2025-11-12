@@ -406,7 +406,7 @@
       URL.revokeObjectURL(url);
     });
 
-    function normalizeSpell(s) { return s ? s.replace(/\([^)]*\)/g, '').replace(/[+\-]/g, '').replace(/\s+/g, '').toLowerCase() : ''; }
+    function normalizeSpell(s) { return s ? s.replace(/\([^)]*\)/g, '').replace(/[+\-_]/g, '').replace(/\s+/g, '').toLowerCase() : ''; }
     function isSpellQuery(q) { return /^[A-Za-z']+$/.test(q); }
 
     function doSearch() {
